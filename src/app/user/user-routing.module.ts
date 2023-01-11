@@ -1,0 +1,35 @@
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+import { UserComponent } from './user.component';
+import {TracksComponent} from "./tracks/tracks.component";
+
+const routes: Routes = [
+  {
+  path: '',
+  component: UserComponent,
+  children: [
+    {
+      path: 'track',
+      component: TracksComponent
+    },
+    {
+      path: '',
+      redirectTo: 'track',
+      pathMatch: 'full'
+    },
+    {
+      path: '**',
+      redirectTo: 'track',
+      pathMatch: 'full',
+    },
+  ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class UserRoutingModule {
+}

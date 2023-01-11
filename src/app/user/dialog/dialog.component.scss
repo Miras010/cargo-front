@@ -1,0 +1,27 @@
+.loginForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginButton {
+  margin-top: 20px;
+  color: white;
+  width: 50%;
+  border: none;
+  padding: 15px 10px;
+  border-radius: 7px;
+  background-color: #adadff;
+}
+.loginButton:hover {
+  background-color: #9090fa;
+  transition: 0.2s linear;
+}
+.p-inputtext {
+  width: 100% !important;
+}
+.logo {
+  width: 200px;
+}
+
