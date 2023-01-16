@@ -7,6 +7,7 @@ import {getFormattedDate} from '../../functionServices/dataService'
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {DialogComponent} from "../dialog/dialog.component";
 import {Track} from '../../models/response/track-models'
+import {CardComponent} from "../cardInfo/card.component";
 
 @Component({
   selector: 'app-tracks',
@@ -47,40 +48,48 @@ export class TracksComponent implements OnInit {
     })
   }
 
+  getBackground (item: any) {
+    if (item.track.receivedInAlmatyDate) {
+      return '#e1f6e6'
+    } else if (item.track.fromChinaToAlmaty) {
+      return '#cbd2ee'
+    } else if (item.track.receivedInChinaDate) {
+      return '#fcdbdb'
+    }
+    return '#ffffff'
+  }
+
+  getTypeText(item: any) {
+    if (item.track.receivedInAlmatyDate) {
+      const date = getFormattedDate(item.track.receivedInAlmatyDate).split(' ')[0]
+      return 'в Алматы' + ' - ' + date
+    } else if (item.track.fromChinaToAlmaty) {
+      const date =  getFormattedDate(item.track.fromChinaToAlmaty).split(' ')[0]
+      return 'отправлено' + ' - ' + date
+    } else if (item.track.receivedInChinaDate) {
+      const date = getFormattedDate(item.track.receivedInChinaDate).split(' ')[0]
+      return 'на складе' + ' - ' + date
+    }
+    return ''
+  }
+
+  cardClick(item: any) {
+    this.ref = this.dialogService.open(CardComponent, {
+      header: 'Детальная информация',
+      width: '90%',
+      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      baseZIndex: 10000,
+      data: {item}
+    });
+
+    this.ref.onClose.subscribe(() =>{
+      this.getTracks()
+    });
+  }
+
   showConfirm() {
     this.messageService.clear();
     this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Вы действительно хотите удалить трек номер?'});
-  }
-
-  deleteTrack (track: any) {
-    try {
-      this.confirmationService.confirm({
-        message: 'Вы уверены что хотите удалить ' + track.track.trackNumber + '?',
-        header: 'Подтверждение',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          this.trackService.unfollowTrack(track._id).toPromise().then(() => {
-            this.messageService.add({
-              severity: "success",
-              summary: "Успешно",
-              detail: "Трек номер успешно удален!"
-            });
-            this.getTracks()
-          }).catch((err) => {
-            this.messageService.add({
-              severity: "info",
-              summary: "Ошибка",
-              detail: err.error.message
-            });
-            console.log('err', err)
-            this.isLoading = false
-          })
-        }
-      });
-    } catch (e) {
-      console.log('e', e)
-    }
-
   }
 
   openDialog () {

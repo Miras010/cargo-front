@@ -44,6 +44,7 @@ export class TracksComponent implements OnInit {
     rows: 10,
     globalFilter: null
   }
+  selectedStatus: any;
   statuses = [
     { value: 'Дата создания', key: 'createdDate' },
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
@@ -58,7 +59,11 @@ export class TracksComponent implements OnInit {
     receivedInAlmatyDate: new FormControl(''),
     receivedInChinaDate: new FormControl(''),
     receivedByClient: new FormControl(''),
-    weight: new FormControl('')
+  })
+
+  addManyForm: FormGroup = new FormGroup({
+    status: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
   })
 
   selectedTracks: Track[] = []
@@ -159,7 +164,6 @@ export class TracksComponent implements OnInit {
       receivedInAlmatyDate: new FormControl(track.receivedInAlmatyDate ? new Date(track.receivedInAlmatyDate) : ''),
       fromChinaToAlmaty: new FormControl(track.fromChinaToAlmaty ? new Date(track.fromChinaToAlmaty) : ''),
       receivedByClient: new FormControl(track.receivedByClient ? new Date(track.receivedByClient) : ''),
-      weight: new FormControl(track.weight)
     })
     console.log(this.trackForm)
     this.productDialog = true;
@@ -192,10 +196,19 @@ export class TracksComponent implements OnInit {
   }
 
   onManySubmit () {
+    if (this.addManyForm.valid) {
       if (this.arraylist.length > 0) {
         // @ts-ignore
         const userId = JSON.parse(localStorage.getItem('userInfo'))._id
-        const newArr = this.arraylist
+        const newArr = this.arraylist.map(item => {
+          let newItem = {
+            trackNumber: ''
+          }
+          // @ts-ignore
+          newItem[this.addManyForm.value.status.key] = this.addManyForm.value.date
+          newItem.trackNumber = item['条码']
+          return newItem
+        })
         console.log('newarr', newArr)
         this.adminTrackService.upsertManyTracks(newArr)
           .toPromise()
@@ -211,10 +224,14 @@ export class TracksComponent implements OnInit {
       } else {
         this.messageService.add({severity:'info', summary: 'Error', detail: 'Не удалось получить данные с файла', life: 3000})
       }
+    }
   }
 
   onSubmit() {
+    console.log('onsubm2it')
+
     if (this.trackForm.valid) {
+      console.log('onsubmit')
       if (this.editingType === 'new') {
         this.adminTrackService.createTrack(this.trackForm.value).toPromise()
           .then(() => {

@@ -8,77 +8,23 @@
 <div class="trackPage">
   <div class="container">
     <p-card>
-      <div>
-        <span class="welcomeText">Добро пожаловать, {{ userInfo.name }}!</span>
+      <div class="mt-3">
+        <span class="welcomeText">Трек номера</span>
       </div>
       <div class="mt-3">
         <p-button (click)="openDialog()" label="Добавить трек номер" icon="pi pi-plus" iconPos="left"></p-button>
       </div>
     </p-card>
-    <div class="trackList row mt-4">
-      <p-accordion *ngFor="let item of data">
-        <p-accordionTab header="{{ item.track.trackNumber }}">
-          <div class="mb-3">
-            <p>Описание: <span class="cardTitle">{{ item.description }}</span></p>
-          </div>
-          <div class="mb-3">
-            <p>Вес: <span class="cardTitle">{{ item.track.weight }}</span></p>
-          </div>
-          <div class="cardSec">
-            <div class="iconSec">
-              <i *ngIf="item.createdDate" class="pi pi-check-circle" style="font-size: 2rem"></i>
-              <i *ngIf="!item.createdDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <div class="">
-              <span class="cardSubTitle">Дата регистрации: </span><br>
-              <span class="cardInfoText">{{ item.createdDate ? item.createdDate : 'Нет данных'  }}</span>
-            </div>
-          </div>
-          <div class="cardSec mt-3">
-            <div class="iconSec">
-              <i *ngIf="item.track.receivedInChinaDate" class="pi pi-check-circle" style="font-size: 2rem"></i>
-              <i *ngIf="!item.track.receivedInChinaDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <div class="">
-              <span class="cardSubTitle">Дата получения на складе в Китае:</span><br>
-              <span class="cardInfoText">{{ item.track.receivedInChinaDate ? item.track.receivedInChinaDate : 'Нет данных'  }}</span>
-            </div>
-          </div>
-          <div class="cardSec mt-3">
-            <div class="iconSec">
-              <i *ngIf="item.track.fromChinaToAlmaty" class="pi pi-check-circle" style="font-size: 2rem"></i>
-              <i *ngIf="!item.track.fromChinaToAlmaty" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <div class="">
-              <span class="cardSubTitle">Дата отправления с Китая в Алматы:</span><br>
-              <span class="cardInfoText">{{ item.track.fromChinaToAlmaty ? item.track.fromChinaToAlmaty : 'Нет данных'  }}</span>
-            </div>
-          </div>
-          <div class="cardSec mt-3">
-            <div class="iconSec">
-              <i *ngIf="item.track.receivedInAlmatyDate" class="pi pi-check-circle" style="font-size: 2rem"></i>
-              <i *ngIf="!item.track.receivedInAlmatyDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <div class="">
-              <span class="cardSubTitle">Дата получения на складе в Алматы:</span><br>
-              <span class="cardInfoText">{{ item.track.receivedInAlmatyDate ? item.track.receivedInAlmatyDate : 'Нет данных'  }}</span>
-            </div>
-          </div>
-          <div class="cardSec mt-3">
-            <div class="iconSec">
-              <i *ngIf="item.track.receivedByClient" class="pi pi-check-circle" style="font-size: 2rem"></i>
-              <i *ngIf="!item.track.receivedByClient" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <div class="">
-              <span class="cardSubTitle">Дата получения клиентом:</span><br>
-              <span class="cardInfoText">{{ item.track.receivedByClient ? item.track.receivedByClient : 'Нет данных' }}</span>
-            </div>
-          </div>
-          <div class="mt-3">
-            <button (click)="deleteTrack(item)" pRipple pButton type="button" label="Удалить" icon="pi pi-trash"></button>
-          </div>
-        </p-accordionTab>
-      </p-accordion>
+    <div *ngFor="let item of data">
+      <div class="mt-3">
+        <div class="card"
+             [ngStyle]="{
+                'background': getBackground(item)
+              }"
+             (click)="cardClick(item)">
+          {{item.track.trackNumber}} - {{ getTypeText(item) }}
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { UserComponent } from './user.component';
 import {TracksComponent} from "./tracks/tracks.component";
+import {HomeComponent} from "./home/home.component";
+import {ReceiptsComponent} from "./receipts/receipts.component";
 
 const routes: Routes = [
   {
@@ -10,17 +12,25 @@ const routes: Routes = [
   component: UserComponent,
   children: [
     {
+      path: 'home',
+      component: HomeComponent
+    },
+    {
       path: 'track',
       component: TracksComponent
     },
     {
+      path: 'receipts',
+      component: ReceiptsComponent
+    },
+    {
       path: '',
-      redirectTo: 'track',
+      redirectTo: 'home',
       pathMatch: 'full'
     },
     {
       path: '**',
-      redirectTo: 'track',
+      redirectTo: 'home',
       pathMatch: 'full',
     },
   ],

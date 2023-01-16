@@ -53,10 +53,11 @@
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
               <th pSortableColumn="trackNumber" style="min-width:15rem">Логин<p-sortIcon field="username"></p-sortIcon></th>
-              <th pSortableColumn="receivedInChinaDate">Name<p-sortIcon field="name"></p-sortIcon></th>
-              <th pSortableColumn="fromChinaToAlmaty">Surname<p-sortIcon field="surname"></p-sortIcon></th>
-              <th pSortableColumn="receivedInAlmatyDate">Num<p-sortIcon field="phoneNumber"></p-sortIcon></th>
+              <th pSortableColumn="receivedInChinaDate">Имя<p-sortIcon field="name"></p-sortIcon></th>
+              <th pSortableColumn="fromChinaToAlmaty">Фамилия<p-sortIcon field="surname"></p-sortIcon></th>
+              <th pSortableColumn="receivedInAlmatyDate">Номер телефона<p-sortIcon field="phoneNumber"></p-sortIcon></th>
               <th pSortableColumn="receivedByClient">Email<p-sortIcon field="mail"></p-sortIcon></th>
+              <th pSortableColumn="isActive">Активирован<p-sortIcon field="isActive"></p-sortIcon></th>
               <th></th>
             </tr>
           </ng-template>
@@ -70,6 +71,7 @@
               <td>{{user.surname}}</td>
               <td>{{user.phoneNumber}}</td>
               <td>{{user.mail}}</td>
+              <td>{{user.isActive ? 'Да' : 'Нет'}}</td>
               <td>
                 <div class="d-flex">
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-1" (click)="edit(user)"></button>

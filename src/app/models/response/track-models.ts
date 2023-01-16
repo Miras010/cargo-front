@@ -13,6 +13,5 @@ export interface Track {
   fromChinaToAlmaty: Date,
   receivedInAlmatyDate: Date,
   receivedInChinaDate: Date,
-  receivedByClient: Date,
-  weight: String,
+  receivedByClient: Date
 }

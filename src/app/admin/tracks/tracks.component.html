@@ -67,7 +67,6 @@
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
               <th pSortableColumn="trackNumber" style="min-width:15rem">Трек номер<p-sortIcon field="trackNumber"></p-sortIcon></th>
-              <th pSortableColumn="weight">Вес (кг)<p-sortIcon field="weight"></p-sortIcon></th>
               <th pSortableColumn="createdDate">Дата создания<p-sortIcon field="createdDate"></p-sortIcon></th>
               <th pSortableColumn="receivedInChinaDate">ДП на складе в Китае<p-sortIcon field="receivedInChinaDate"></p-sortIcon></th>
               <th pSortableColumn="fromChinaToAlmaty">Отправлено с Китая в Алматы<p-sortIcon field="fromChinaToAlmaty"></p-sortIcon></th>
@@ -105,7 +104,6 @@
                 <p-tableCheckbox [value]="track"></p-tableCheckbox>
               </td>
               <td>{{track.trackNumber}}</td>
-              <td>{{track.weight}}</td>
               <td>{{track.createdDate}}</td>
               <td>{{track.receivedInChinaDate}}</td>
               <td>{{track.fromChinaToAlmaty}}</td>
@@ -133,10 +131,6 @@
             <div class="field">
               <label class="mb-2" for="name">Трек номер</label>
               <input formControlName="trackNumber" type="text" pInputText id="name" required autofocus />
-            </div>
-            <div class="field">
-              <label class="mb-2" for="name">Вес (кг)</label>
-              <input formControlName="weight" type="text" pInputText id="weight" required autofocus />
             </div>
             <div class="field mt-3">
               <label class="mb-2">Дата получения на складе в Китае</label>
@@ -168,11 +162,20 @@
 
       <p-dialog [(visible)]="addManyDialog" [style]="{width: '450px'}" header="Добавить данные с документа" [modal]="true" styleClass="p-fluid">
         <ng-template pTemplate="content">
+          <form [formGroup]="addManyForm">
+            <div class="field mt-3">
+              <label class="mb-2">Тип</label>
+              <p-dropdown formControlName="status" [options]="statuses" optionLabel="value"></p-dropdown>
+            </div>
+            <div class="field mt-3">
+              <label class="mb-2">Дата</label>
+              <p-calendar formControlName="date" dateFormat="dd.mm.yy" [showTime]="true" hourFormat="24" [showButtonBar]="true"></p-calendar>
+            </div>
+          </form>
           <div class="mt-3">
             <input type="file" class="form-control" (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
           </div>
         </ng-template>
-
         <ng-template pTemplate="footer">
           <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideManyDialog()"></button>
           <button pButton pRipple type="submit" label="Save" icon="pi pi-check" (click)="onManySubmit()" class="p-button-text"></button>

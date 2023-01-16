@@ -24,6 +24,13 @@ export class AdminUsersService {
     })
   }
 
+  public loadUsers (params: any): Observable<any> {
+    const { globalFilter } = params
+    return this.http.get(this.fullUrl + '/loadUsers?' + `globalFilter=${globalFilter}`,  {
+      headers: this.headers
+    })
+  }
+
   public createUser (data: any): Observable<any> {
     return this.http.post(this.fullUrl + '/create', data, {
       headers: this.headers

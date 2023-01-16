@@ -8,7 +8,7 @@ import {AdminUsersService} from "../../services/admin/admin-users.service";
 
 
 @Component({
-  selector: 'app-tracks',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
   styles: [`

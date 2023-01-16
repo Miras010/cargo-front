@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import {TracksComponent} from "./tracks/tracks.component";
 import {UsersComponent} from "./users/users.component";
+import {ReceiptsComponent} from "./receipts/receipts.component";
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
       path: 'tracks',
       component: TracksComponent
+    },
+    {
+      path: 'receipts',
+      component: ReceiptsComponent
     },
     {
       path: 'users',

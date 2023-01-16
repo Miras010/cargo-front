@@ -7,11 +7,13 @@ import {Table} from "primeng/table"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
 import * as XLSX from 'xlsx'
 import { startOfMonth, endOfMonth } from 'date-fns'
+import {AdminReceiptsService} from "../../services/admin/admin-receipts.service";
+import {AdminUsersService} from "../../services/admin/admin-users.service";
 
 @Component({
   selector: 'app-tracks',
-  templateUrl: './tracks.component.html',
-  styleUrls: ['./tracks.component.scss'],
+  templateUrl: './receipts.component.html',
+  styleUrls: ['./receipts.component.scss'],
   styles: [`
         :host ::ng-deep .p-dialog .product-image {
             width: 150px;
@@ -21,14 +23,13 @@ import { startOfMonth, endOfMonth } from 'date-fns'
     `],
   providers: [MessageService,ConfirmationService]
 })
-
-export class TracksComponent implements OnInit {
+export class ReceiptsComponent implements OnInit {
   totalRecords: number = 0;
   loading: boolean = false
   productDialog: any
   addManyDialog: any
   editingType: string = ''
-  tracks: Track[] = []
+  receipts: any = []
   file: File | undefined
   arrayBuffer: any
   title = 'xlsreader'
@@ -45,45 +46,35 @@ export class TracksComponent implements OnInit {
     rows: 10,
     globalFilter: null
   }
-  statuses = [
-    { value: 'Дата создания', key: 'createdDate' },
-    { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
-    { value: 'Дата отправления в Алматы', key: 'fromChinaToAlmaty' },
-    { value: 'Дата получения на складе в Алматы', key: 'receivedInAlmatyDate' },
-    { value: 'Дата получения клиентом', key: 'receivedByClient' },
-  ]
 
-  trackForm: FormGroup = new FormGroup({
-    trackNumber: new FormControl('', Validators.required),
-    fromChinaToAlmaty: new FormControl(''),
-    receivedInAlmatyDate: new FormControl(''),
-    receivedInChinaDate: new FormControl(''),
-    receivedByClient: new FormControl('')
+  receiptForm: FormGroup = new FormGroup({
+    receiver: new FormControl('', Validators.required),
+    weight: new FormControl('', Validators.required),
+    totalSum: new FormControl(''),
+    totalNumber: new FormControl(''),
+    createdBy: new FormControl(''),
   })
 
   selectedTracks: Track[] = []
+  receivers: any[] = []
 
   @ViewChild('dt') dt: Table | undefined
 
   constructor(private messageService: MessageService,
               private confirmationService: ConfirmationService,
-              private adminTrackService: AdminTrackService) { }
+              private adminReceiptsService: AdminReceiptsService,
+              private adminUsersService: AdminUsersService) { }
 
   ngOnInit() {
     // this.getAllTracks(this.defaultParams)
   }
 
   enterFilter() {
-    console.log('this.filterBy',this.filterBy)
     const params = {
       page: 1,
-      rows: 10,
-      globalFilter: null,
-      filterBy: this.filterBy.key,
-      from: this.rangeDates[0].getTime(),
-      to: this.rangeDates[1].getTime(),
+      rows: 10
     }
-    this.getAllTracks(params)
+    this.getAll(params)
   }
 
   loadCustomers(event: LazyLoadEvent) {
@@ -96,16 +87,15 @@ export class TracksComponent implements OnInit {
       // @ts-ignore
       page = (first / rows) + 1
     }
-    this.getAllTracks({rows, page, globalFilter})
+    this.getAll({rows, page, globalFilter})
   }
 
-  getAllTracks (params: any) {
+  getAll (params: any) {
     this.loading = true
-    this.adminTrackService.getAllPartnerTracks(params).toPromise()
+    this.adminReceiptsService.getAll(params).toPromise()
       .then(resp => {
-        this.tracks = resp.resp
+        this.receipts = resp.resp
         this.totalRecords = resp.totalCount
-        console.log('resp', resp)
       }).catch(err => {
         console.log('err', err)
      }).finally(() => {
@@ -122,10 +112,6 @@ export class TracksComponent implements OnInit {
     this.productDialog = true;
   }
 
-  openMany () {
-    this.addManyDialog = true;
-  }
-
   deleteSelectedProducts() {
     this.confirmationService.confirm({
       message: 'Вы уверены что хотите удалить выбранные треки?',
@@ -134,34 +120,33 @@ export class TracksComponent implements OnInit {
       accept: () => {
         let promises: Promise<any>[] = []
         this.selectedTracks.forEach((item) => {
-          promises.push(this.adminTrackService.deleteTrack(item._id).toPromise())
+          promises.push(this.adminReceiptsService.deleteReceipt(item._id).toPromise())
         })
         Promise.all(promises)
           .then(() => {
-            this.getAllTracks(this.defaultParams)
+            this.getAll(this.defaultParams)
           this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Треки удалены', life: 3000});
         })
           .catch(err => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось удалить трек номер' + err.error.message, life: 3000});
           })
         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
-        this.getAllTracks(this.defaultParams)
+        this.getAll(this.defaultParams)
       }
     });
   }
 
-  editProduct(track: Track) {
-    console.log(track)
+  editProduct(receipt: any) {
+    console.log(receipt)
     this.editingType = 'edit'
-    this.trackForm =  new FormGroup({
-      _id: new FormControl(track._id),
-      trackNumber: new FormControl(track.trackNumber, Validators.required),
-      receivedInChinaDate: new FormControl(track.receivedInChinaDate ? new Date(track.receivedInChinaDate) : ''),
-      receivedInAlmatyDate: new FormControl(track.receivedInAlmatyDate ? new Date(track.receivedInAlmatyDate) : ''),
-      fromChinaToAlmaty: new FormControl(track.fromChinaToAlmaty ? new Date(track.fromChinaToAlmaty) : ''),
-      receivedByClient: new FormControl(track.receivedByClient ? new Date(track.receivedByClient) : '')
+    this.receiptForm =  new FormGroup({
+      _id: new FormControl(receipt._id),
+      receiver: new FormControl(receipt.receiver, Validators.required),
+      weight: new FormControl(receipt.weight, Validators.required),
+      totalSum: new FormControl(receipt.totalSum, Validators.required),
+      totalNumber: new FormControl(receipt.totalNumber, Validators.required),
     })
-    console.log(this.trackForm)
+    console.log(this.receiptForm)
     this.productDialog = true;
   }
 
@@ -171,9 +156,9 @@ export class TracksComponent implements OnInit {
       header: 'Подтверждение',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.adminTrackService.deleteTrack(track._id).toPromise()
+        this.adminReceiptsService.deleteReceipt(track._id).toPromise()
           .then(() => {
-            this.getAllTracks(this.defaultParams)
+            this.getAll(this.defaultParams)
             this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек успешно удален', life: 3000});
           })
           .catch(err => {
@@ -187,51 +172,28 @@ export class TracksComponent implements OnInit {
     this.productDialog = false;
   }
 
-  hideManyDialog () {
-    this.addManyDialog = false
-  }
-
-  onManySubmit () {
-      if (this.arraylist.length > 0) {
-        // @ts-ignore
-        const userId = JSON.parse(localStorage.getItem('userInfo'))._id
-        const newArr = this.arraylist
-        console.log('newarr', newArr)
-        this.adminTrackService.upsertManyTracks(newArr)
-          .toPromise()
-          .then((resp) => {
-            this.addManyDialog = false
-            this.getAllTracks(this.defaultParams)
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно создан', life: 3000});
-            console.log(resp)
-          })
-          .catch((err) => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать трек номер' + err.error.message, life: 3000});
-          })
-      } else {
-        this.messageService.add({severity:'info', summary: 'Error', detail: 'Не удалось получить данные с файла', life: 3000})
-      }
-  }
-
   onSubmit() {
-    if (this.trackForm.valid) {
+    if (this.receiptForm.valid && this.receiptForm.value.receiver._id) {
+      this.receiptForm.patchValue({
+        receiver: this.receiptForm.value.receiver._id
+      })
       if (this.editingType === 'new') {
-        this.adminTrackService.createTrack(this.trackForm.value).toPromise()
+        this.adminReceiptsService.createReceipt(this.receiptForm.value).toPromise()
           .then(() => {
             this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно создан', life: 3000});
             this.productDialog = false
-            this.getAllTracks(this.defaultParams)
+            this.getAll(this.defaultParams)
           })
           .catch((err) => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать трек номер' + err.error.message, life: 3000});
             console.log(err)
           })
       } else if (this.editingType === 'edit') {
-        this.adminTrackService.updateTrack(this.trackForm.value).toPromise()
+        this.adminReceiptsService.updateReceipt(this.receiptForm.value).toPromise()
           .then(() => {
             this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно обновлен', life: 3000});
             this.productDialog = false
-            this.getAllTracks(this.defaultParams)
+            this.getAll(this.defaultParams)
           })
           .catch((err) => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось обновить трек номер' + err, life: 3000});
@@ -240,13 +202,13 @@ export class TracksComponent implements OnInit {
       }
 
     }
-    console.log('t', this.trackForm.value)
+    console.log('t', this.receiptForm.value)
   }
 
   findIndexById(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.tracks.length; i++) {
-      if (this.tracks[i]._id === id) {
+    for (let i = 0; i < this.receipts.length; i++) {
+      if (this.receipts[i]._id === id) {
         index = i;
         break;
       }
@@ -264,37 +226,17 @@ export class TracksComponent implements OnInit {
     return id;
   }
 
-  onUpload(event: { files: any; }) {
-    for(let file of event.files) {
-      this.uploadedFiles.push(file);
+  onLazyLoad(event: any) {
+    console.log(event)
+    if (event.query) {
+      this.adminUsersService.loadUsers({globalFilter: event.query}).toPromise()
+        .then(resp => {
+          this.receivers = resp
+          console.log('resp', resp)
+        }).catch(err => {
+        this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось найти пользователей' + err, life: 3000});
+      })
     }
 
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
   }
-
-  addfile(event: Event)
-  {
-    // @ts-ignore
-    this.file= event.target.files[0];
-    let fileReader = new FileReader();
-    // @ts-ignore
-    fileReader.readAsArrayBuffer(this.file);
-    fileReader.onload = (e) => {
-      this.arrayBuffer = fileReader.result;
-      let data = new Uint8Array(this.arrayBuffer);
-      let arr = [];
-      for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-      let bstr = arr.join("");
-      let workbook = XLSX.read(bstr, {type:"binary", cellDates: true, dateNF: 'yyyy/mm/dd;@'});
-      let first_sheet_name = workbook.SheetNames[0];
-      let worksheet = workbook.Sheets[first_sheet_name];
-       // @ts-ignore
-      this.arraylist = XLSX.utils.sheet_to_json(worksheet,{raw:true})
-      console.log('XLSX', this.arraylist);
-
-      this.fileList = [];
-
-    }
-  }
-
 }
