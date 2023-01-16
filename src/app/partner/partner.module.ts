@@ -21,6 +21,8 @@ import {RippleModule} from "primeng/ripple";
 import {UserModule} from "../user/user.module";
 import {PartnerHeaderComponent} from "../ui-components/partner-header/partner-header.component";
 import {CalendarModule} from "primeng/calendar";
+import {ReceiptsComponent} from "./receipts/receipts.component";
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import {CalendarModule} from "primeng/calendar";
     UserModule,
     ReactiveFormsModule,
     CalendarModule,
+    AutoCompleteModule,
   ],
   exports: [
   ],
@@ -50,6 +53,7 @@ import {CalendarModule} from "primeng/calendar";
     PartnerComponent,
     TracksComponent,
     PartnerHeaderComponent,
+    ReceiptsComponent
   ]
 })
 
