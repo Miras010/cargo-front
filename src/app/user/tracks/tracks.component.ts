@@ -52,9 +52,9 @@ export class TracksComponent implements OnInit {
     if (item.track.receivedInAlmatyDate) {
       return '#34f55f'
     } else if (item.track.fromChinaToAlmaty) {
-      return '#ff9292'
-    } else if (item.track.receivedInChinaDate) {
       return '#ffe94e'
+    } else if (item.track.receivedInChinaDate) {
+      return '#e0e0e0'
     }
     return '#ffffff'
   }
