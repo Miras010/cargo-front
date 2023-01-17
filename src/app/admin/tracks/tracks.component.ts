@@ -7,6 +7,8 @@ import {Table} from "primeng/table"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
 import * as XLSX from 'xlsx'
 import { startOfMonth, endOfMonth } from 'date-fns'
+// @ts-ignore
+import { getFormattedDate } from '../../functionServices/dataService';
 
 @Component({
   selector: 'app-tracks',
@@ -46,7 +48,6 @@ export class TracksComponent implements OnInit {
   }
   selectedStatus: any;
   statuses = [
-    { value: 'Дата создания', key: 'createdDate' },
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
     { value: 'Дата отправления в Алматы', key: 'fromChinaToAlmaty' },
     { value: 'Дата получения на складе в Алматы', key: 'receivedInAlmatyDate' },
@@ -76,6 +77,10 @@ export class TracksComponent implements OnInit {
 
   ngOnInit() {
     // this.getAllTracks(this.defaultParams)
+  }
+
+  getFormattedDate (date: any) {
+    return getFormattedDate(date).split(' ')[0]
   }
 
   enterFilter() {

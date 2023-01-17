@@ -104,11 +104,11 @@
                 <p-tableCheckbox [value]="track"></p-tableCheckbox>
               </td>
               <td>{{track.trackNumber}}</td>
-              <td>{{track.createdDate}}</td>
-              <td>{{track.receivedInChinaDate}}</td>
-              <td>{{track.fromChinaToAlmaty}}</td>
-              <td>{{track.receivedInAlmatyDate}}</td>
-              <td>{{track.receivedByClient}}</td>
+              <td>{{getFormattedDate(track.createdDate)}}</td>
+              <td>{{getFormattedDate(track.receivedInChinaDate)}}</td>
+              <td>{{getFormattedDate(track.fromChinaToAlmaty)}}</td>
+              <td>{{getFormattedDate(track.receivedInAlmatyDate)}}</td>
+              <td>{{getFormattedDate(track.receivedByClient)}}</td>
               <td>
                 <div class="d-flex">
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-1" (click)="editProduct(track)"></button>

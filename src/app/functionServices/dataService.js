@@ -51,7 +51,7 @@ export function getFormattedDate (str) {
       let attributeValueDate = new Date(str)
       let utc = attributeValueDate.getTime() + (x.getTimezoneOffset() * 60000)
       const nd = new Date(utc + (3600000 * astanaTimezone))
-      date = format(nd, 'MM.dd.yyyy HH:mm')
+      date = format(nd, 'dd.MM.yyyy HH:mm')
     } catch (e) {
       date = str
     }
