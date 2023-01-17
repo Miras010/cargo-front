@@ -4,24 +4,24 @@
   <div class="mb-4 mt-3">
     <p>Описание: <span class="cardTitle">{{ item.description }}</span></p>
   </div>
-  <div class="cardSec">
-    <div class="iconSec">
-      <i *ngIf="item.createdDate" class="pi pi-check-circle" style="font-size: 2rem"></i>
-      <i *ngIf="!item.createdDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-    </div>
-    <div class="">
-      <span class="cardSubTitle">Дата регистрации: </span><br>
-      <span class="cardInfoText">{{ item.createdDate ? item.createdDate : 'Нет данных'  }}</span>
-    </div>
-  </div>
+<!--  <div class="cardSec">-->
+<!--    <div class="iconSec">-->
+<!--      <i *ngIf="item.createdDate" class="pi pi-check-circle" style="font-size: 2rem"></i>-->
+<!--      <i *ngIf="!item.createdDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>-->
+<!--    </div>-->
+<!--    <div class="">-->
+<!--      <span class="cardSubTitle">Дата регистрации: </span><br>-->
+<!--      <span class="cardInfoText">{{ item.createdDate ? item.createdDate : 'Нет данных'  }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="cardSec mt-3">
     <div class="iconSec">
       <i *ngIf="item.track.receivedInChinaDate" class="pi pi-check-circle" style="font-size: 2rem"></i>
       <i *ngIf="!item.track.receivedInChinaDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
     </div>
     <div class="">
-      <span class="cardSubTitle">Дата получения на складе в Китае:</span><br>
-      <span class="cardInfoText">{{ item.track.receivedInChinaDate ? item.track.receivedInChinaDate : 'Нет данных'  }}</span>
+      <span class="cardSubTitle">Получено на складе в Китае:</span><br>
+      <span class="cardInfoText">{{ item.track.receivedInChinaDate ? getFormattedDate(item.track.receivedInChinaDate) : 'Нет данных'  }}</span>
     </div>
   </div>
   <div class="cardSec mt-3">
@@ -30,8 +30,8 @@
       <i *ngIf="!item.track.fromChinaToAlmaty" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
     </div>
     <div class="">
-      <span class="cardSubTitle">Дата отправления с Китая в Алматы:</span><br>
-      <span class="cardInfoText">{{ item.track.fromChinaToAlmaty ? item.track.fromChinaToAlmaty : 'Нет данных'  }}</span>
+      <span class="cardSubTitle">Отправлено с Китая в Алматы:</span><br>
+      <span class="cardInfoText">{{ item.track.fromChinaToAlmaty ? getFormattedDate(item.track.fromChinaToAlmaty) : 'Нет данных'  }}</span>
     </div>
   </div>
   <div class="cardSec mt-3">
@@ -40,8 +40,8 @@
       <i *ngIf="!item.track.receivedInAlmatyDate" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
     </div>
     <div class="">
-      <span class="cardSubTitle">Дата получения на складе в Алматы:</span><br>
-      <span class="cardInfoText">{{ item.track.receivedInAlmatyDate ? item.track.receivedInAlmatyDate : 'Нет данных'  }}</span>
+      <span class="cardSubTitle">Получено на складе в Алматы:</span><br>
+      <span class="cardInfoText">{{ item.track.receivedInAlmatyDate ? getFormattedDate(item.track.receivedInAlmatyDate) : 'Нет данных'  }}</span>
     </div>
   </div>
   <div class="cardSec mt-3">
@@ -50,8 +50,8 @@
       <i *ngIf="!item.track.receivedByClient" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
     </div>
     <div class="">
-      <span class="cardSubTitle">Дата получения клиентом:</span><br>
-      <span class="cardInfoText">{{ item.track.receivedByClient ? item.track.receivedByClient : 'Нет данных' }}</span>
+      <span class="cardSubTitle">Получено клиентом:</span><br>
+      <span class="cardInfoText">{{ item.track.receivedByClient ? getFormattedDate(item.track.receivedByClient) : 'Нет данных' }}</span>
     </div>
   </div>
   <div class="mt-3">

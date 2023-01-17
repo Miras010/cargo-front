@@ -50,11 +50,11 @@ export class TracksComponent implements OnInit {
 
   getBackground (item: any) {
     if (item.track.receivedInAlmatyDate) {
-      return '#e1f6e6'
+      return '#34f55f'
     } else if (item.track.fromChinaToAlmaty) {
-      return '#cbd2ee'
+      return '#ff9292'
     } else if (item.track.receivedInChinaDate) {
-      return '#fcdbdb'
+      return '#ffe94e'
     }
     return '#ffffff'
   }
@@ -65,10 +65,10 @@ export class TracksComponent implements OnInit {
       return 'в Алматы' + ' - ' + date
     } else if (item.track.fromChinaToAlmaty) {
       const date =  getFormattedDate(item.track.fromChinaToAlmaty).split(' ')[0]
-      return 'отправлено' + ' - ' + date
+      return 'отправлено из Китая' + ' - ' + date
     } else if (item.track.receivedInChinaDate) {
       const date = getFormattedDate(item.track.receivedInChinaDate).split(' ')[0]
-      return 'на складе' + ' - ' + date
+      return 'на складе в Китае' + ' - ' + date
     }
     return ''
   }

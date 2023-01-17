@@ -3,6 +3,8 @@ import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TrackService} from "../../services/track.service";
+// @ts-ignore
+import { getFormattedDate } from '../../functionServices/dataService';
 
 @Component({
   templateUrl: 'card.component.html',
@@ -31,6 +33,10 @@ export class CardComponent {
 
   selectProduct() {
     this.ref.close('CLOSE');
+  }
+
+  getFormattedDate (date: Date) {
+    return getFormattedDate(date).split(' ')[0]
   }
 
   deleteTrack (item: any) {

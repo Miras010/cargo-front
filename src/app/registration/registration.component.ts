@@ -53,8 +53,8 @@ export class RegistrationComponent implements OnInit {
         }).catch((e) => {
         this.messageService.add({
           severity: "info",
-          summary: "Ошибка",
-          detail: e.message
+          summary: "Ошибка регистрации",
+          detail: e.error.message
         });
       })
     } else {
