@@ -54,13 +54,15 @@ export class ScanComponent implements OnInit {
         .then((resp) => {
           this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
           console.log(resp)
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 1000)
         })
         .catch((err) => {
           this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
         }).finally(() => {
-        this.trackNumber = ''
+          this.trackNumber = ''
         this.isLoading = false
-        window.location.reload();
       })
     // } else {
     //   this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Выберите статус', life: 3000});
