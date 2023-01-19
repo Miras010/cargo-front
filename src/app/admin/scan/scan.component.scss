@@ -1,0 +1,20 @@
+.trackCard {
+  background-color: #EFF3F7;
+  padding-top: 50px;
+  margin-top: 80px;
+  height: 100vh;
+}
+
+.buttonsSec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+  max-width: 300px;
+  flex-direction: column;
+}

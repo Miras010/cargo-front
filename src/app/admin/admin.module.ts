@@ -32,6 +32,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {ReceiptsComponent} from "./receipts/receipts.component";
 import {SkeletonModule} from "primeng/skeleton";
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {ScanComponent} from "./scan/scan.component";
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import {AutoCompleteModule} from "primeng/autocomplete";
     TracksComponent,
     ReceiptsComponent,
     AdminHeaderComponent,
-    UsersComponent
+    UsersComponent,
+    ScanComponent
   ],
 })
 

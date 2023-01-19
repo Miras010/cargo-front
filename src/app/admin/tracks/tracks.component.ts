@@ -220,11 +220,11 @@ export class TracksComponent implements OnInit {
           .then((resp) => {
             this.addManyDialog = false
             this.getAllTracks(this.defaultParams)
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно создан', life: 3000});
+            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
             console.log(resp)
           })
           .catch((err) => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать трек номер' + err.error.message, life: 3000});
+            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
           })
       } else {
         this.messageService.add({severity:'info', summary: 'Error', detail: 'Не удалось получить данные с файла', life: 3000})
