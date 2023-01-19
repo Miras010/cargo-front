@@ -69,9 +69,9 @@ export class ScanComponent implements OnInit {
     // }
   }
 
-  change(event: any) {
+  submit() {
     let data = {
-      trackNumber: event,
+      trackNumber: this.trackNumber,
       receivedInAlmatyDate: Date.now()
     }
     this.updateTrack([data])
