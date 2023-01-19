@@ -122,7 +122,8 @@
         <ng-template pTemplate="content">
           <form [formGroup]="receiptForm">
             <div class="field">
-<!--              <p-autoComplete formControlName="receiver" [showEmptyMessage]="true" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [minLength]="1"></p-autoComplete>-->
+              <label class="mb-2">Получатель</label>
+              <!--              <p-autoComplete formControlName="receiver" [showEmptyMessage]="true" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [minLength]="1"></p-autoComplete>-->
               <p-autoComplete formControlName="receiver" [showEmptyMessage]="true" [suggestions]="receivers" (completeMethod)="onLazyLoad($event)" field="username"></p-autoComplete>
             </div>
             <div class="field mt-3">

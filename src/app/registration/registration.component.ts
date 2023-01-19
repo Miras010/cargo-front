@@ -15,6 +15,7 @@ export class RegistrationComponent implements OnInit {
   loginForm: any;
   logoPath = 'assets/logo.png'
   submitted = false;
+  isLoading: boolean = false
 
   constructor(private messageService: MessageService,
               private authService: AuthService,
@@ -40,6 +41,7 @@ export class RegistrationComponent implements OnInit {
       symbols.forEach(symbol => {
         this.loginForm.value.phoneNumber = this.loginForm.value.phoneNumber.replaceAll(symbol, '')
       })
+      this.isLoading = true
       this.authService.register(this.loginForm.value).toPromise()
         .then(() => {
           this.messageService.add({
@@ -55,7 +57,9 @@ export class RegistrationComponent implements OnInit {
           severity: "info",
           summary: "Ошибка регистрации",
           detail: e.error.message
-        });
+        })
+      }).finally(() => {
+        this.isLoading = false
       })
     } else {
       this.messageService.add({

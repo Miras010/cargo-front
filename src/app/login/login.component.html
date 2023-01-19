@@ -13,7 +13,7 @@
               <input class="form-control" id="password" type="password" pInputText formControlName="password" name="password">
               <label for="float-input">Пароль</label>
             </div>
-            <button pButton type="submit">Авторизоваться</button>
+            <button [disabled]="isLoading" pButton type="submit">Авторизоваться</button>
             <div class="mt-4">
               <span class="footerSec">
                 У вас нет аккаунта? <a routerLink="/registration">Зарегистрироваться</a>

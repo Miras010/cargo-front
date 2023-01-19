@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: any;
   logoPath = 'assets/logo.png'
   submitted = false;
+  isLoading: boolean = false
 
   constructor(private authService: AuthService,
               private messageService: MessageService,
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true
     if (this.loginForm.valid) {
+      this.isLoading = true
       this.authService.login(this.loginForm.value.login, this.loginForm.value.password)
         .toPromise()
         .then(res => {
@@ -38,7 +40,9 @@ export class LoginComponent implements OnInit {
         }).catch((err) => {
         console.log(err);
         this.messageService.add({severity:'error', summary: 'Ошибка', detail: err.error.message, life: 3000});
-      });
+      }).finally(() => {
+        this.isLoading = false
+      })
     } else {
       this.messageService.add({severity:'info', summary:'Info Message', detail:'Не все поля заполнены!'})
     }
