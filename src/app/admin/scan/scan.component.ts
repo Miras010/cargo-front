@@ -10,6 +10,11 @@ import { startOfMonth, endOfMonth } from 'date-fns'
 import {AdminReceiptsService} from "../../services/admin/admin-receipts.service";
 import {AdminUsersService} from "../../services/admin/admin-users.service";
 
+export interface TrackInfo {
+  trackNumber: string,
+  receivedInAlmatyDate: Date
+}
+
 @Component({
   selector: 'app-tracks',
   templateUrl: './scan.component.html',
@@ -27,6 +32,7 @@ export class ScanComponent implements OnInit {
 
   @ViewChild('inputRef') inputRef: ElementRef | undefined;
 
+  trackList: TrackInfo[] = []
   trackNumber: string = ''
   selectedStatus: any;
   isLoading: boolean = false;
@@ -47,13 +53,13 @@ export class ScanComponent implements OnInit {
   }
 
   updateTrack (data: any) {
-    // if (this.selectedStatus) {
       this.isLoading = true
       this.adminTrackService.upsertManyTracks(data)
         .toPromise()
         .then((resp) => {
           this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
           console.log(resp)
+          this.trackList = []
           // setTimeout(() => {
           //   window.location.reload();
           // }, 1000)
@@ -64,16 +70,23 @@ export class ScanComponent implements OnInit {
           this.trackNumber = ''
         this.isLoading = false
       })
-    // } else {
-    //   this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Выберите статус', life: 3000});
-    // }
+  }
+
+  change (event: any) {
+    if (this.trackNumber.length > 0) {
+      const filtered = this.trackList.filter(track => this.trackNumber === track.trackNumber)
+      if (filtered.length === 0) {
+        let data = {
+          trackNumber: this.trackNumber,
+          receivedInAlmatyDate: new Date(Date.now())
+        }
+        this.trackList.push(data)
+      }
+      this.trackNumber = ''
+    }
   }
 
   submit() {
-    let data = {
-      trackNumber: this.trackNumber,
-      receivedInAlmatyDate: Date.now()
-    }
-    this.updateTrack([data])
+    this.updateTrack(this.trackList)
   }
 }
