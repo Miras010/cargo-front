@@ -5,6 +5,7 @@ import { UserComponent } from './user.component';
 import {TracksComponent} from "./tracks/tracks.component";
 import {HomeComponent} from "./home/home.component";
 import {ReceiptsComponent} from "./receipts/receipts.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
       path: 'receipts',
       component: ReceiptsComponent
+    },
+    {
+      path: 'profile',
+      component: ProfileComponent
     },
     {
       path: '',

@@ -36,6 +36,8 @@ export class ScanComponent implements OnInit {
   trackNumber: string = ''
   selectedStatus: any;
   isLoading: boolean = false;
+  strArr: string[] = []
+  resultStr: string = ''
 
   statuses = [
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
@@ -73,17 +75,32 @@ export class ScanComponent implements OnInit {
   }
 
   change (event: any) {
-    if (this.trackNumber.length > 0) {
-      const filtered = this.trackList.filter(track => this.trackNumber === track.trackNumber)
-      if (filtered.length === 0) {
-        let data = {
-          trackNumber: this.trackNumber,
-          receivedInAlmatyDate: new Date(Date.now())
-        }
-        this.trackList.push(data)
+    console.log('event', event)
+    this.strArr.push(event)
+    console.log('strArr', this.strArr)
+    if (this.strArr.length > 2) {
+      if (this.strArr[this.strArr.length - 1].includes(this.strArr[this.strArr.length - 2])) {
+        console.log('continue')
+        this.resultStr = this.strArr[this.strArr.length - 1]
+      } else {
+        console.log('its diff')
       }
-      this.trackNumber = ''
     }
+    // if (this.trackNumber.length > 0) {
+    //   const filtered = this.trackList.filter(track => this.trackNumber === track.trackNumber)
+    //   if (filtered.length === 0) {
+    //     let data = {
+    //       trackNumber: this.trackNumber,
+    //       receivedInAlmatyDate: new Date(Date.now())
+    //     }
+    //     this.trackList.push(data)
+    //   }
+    //   this.trackNumber = ''
+    // }
+  }
+
+  search(ev: any) {
+    console.log('ev', ev)
   }
 
   submit() {

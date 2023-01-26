@@ -21,26 +21,29 @@ import {ConfirmationService} from "primeng/api";
 import {CardComponent} from "./cardInfo/card.component";
 import {HomeComponent} from "./home/home.component";
 import {ReceiptsComponent} from "./receipts/receipts.component";
+import {ProfileComponent} from "./profile/profile.component";
+import {InputMaskModule} from "primeng/inputmask";
 
 @NgModule({
-    imports: [
-        UserRoutingModule,
-        CardModule,
-        FormsModule,
-        ProgressSpinnerModule,
-        NgIf,
-        AccordionModule,
-        NgForOf,
-        ButtonModule,
-        ToastModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        InputTextareaModule,
-        ConfirmDialogModule,
-        DialogModule,
-        RippleModule,
-        NgStyle
-    ],
+  imports: [
+    UserRoutingModule,
+    CardModule,
+    FormsModule,
+    ProgressSpinnerModule,
+    NgIf,
+    AccordionModule,
+    NgForOf,
+    ButtonModule,
+    ToastModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    InputTextareaModule,
+    ConfirmDialogModule,
+    DialogModule,
+    RippleModule,
+    NgStyle,
+    InputMaskModule
+  ],
   exports: [
   ],
   declarations: [
@@ -50,7 +53,8 @@ import {ReceiptsComponent} from "./receipts/receipts.component";
     UserHeaderComponent,
     DialogComponent,
     CardComponent,
-    ReceiptsComponent
+    ReceiptsComponent,
+    ProfileComponent
   ],
   providers: [ConfirmationService],
 })
