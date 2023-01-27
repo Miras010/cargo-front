@@ -61,12 +61,13 @@ export class ProfileComponent implements OnInit {
 
   onSubmit () {
     if (this.userForm.valid) {
+      this.isLoading = true
       const symbols = ['+', '(', ')', ' ', '-']
       symbols.forEach(symbol => {
         this.userForm.value.phoneNumber = this.userForm.value.phoneNumber.replaceAll(symbol, '')
       })
       this.userService.updateByUser(this.userForm.value).toPromise()
-        .then(response => {
+        .then(() => {
           this.getUserData()
           this.messageService.add({
             severity: "success",
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
         })
       })
         .finally(() => {
+          this.isLoading = false
           this.onEditing = false
         })
     }
