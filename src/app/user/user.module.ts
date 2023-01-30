@@ -23,6 +23,7 @@ import {HomeComponent} from "./home/home.component";
 import {ReceiptsComponent} from "./receipts/receipts.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {InputMaskModule} from "primeng/inputmask";
+import {NewUserHeaderComponent} from "../ui-components/new-user-header/new-user-header.component";
 
 @NgModule({
   imports: [
@@ -44,13 +45,15 @@ import {InputMaskModule} from "primeng/inputmask";
     NgStyle,
     InputMaskModule
   ],
-  exports: [
-  ],
+    exports: [
+        NewUserHeaderComponent
+    ],
   declarations: [
     UserComponent,
     TracksComponent,
     HomeComponent,
     UserHeaderComponent,
+    NewUserHeaderComponent,
     DialogComponent,
     CardComponent,
     ReceiptsComponent,
