@@ -4,12 +4,12 @@ export const environment = {
   // cargoType: 'logo',
 
   // ZHAN
-  apiUrl: 'http://78.40.108.6:5000/api',
-  cargoType: 'ZHAN',
+  // apiUrl: 'http://78.40.108.6:5000/api',
+  // cargoType: 'ZHAN',
 
   // AINAR
-  // apiUrl: 'http://78.40.108.106:5000/api',
-  // cargoType: 'AINAR',
+  apiUrl: 'http://78.40.108.106:5000/api',
+  cargoType: 'AINAR',
 
   // DAR
   // apiUrl: 'http://78.40.108.102:5000/api',
