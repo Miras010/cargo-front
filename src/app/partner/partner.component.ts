@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     template: `
       <app-partner-header></app-partner-header>
       <router-outlet></router-outlet>
-      <app-new-user-header></app-new-user-header>
     `,
 })
 

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../environments/environment'
 
 @Component({
   selector: 'app-user-header',
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./user-header.component.scss']
 })
 export class UserHeaderComponent implements OnInit {
-  logoPath = 'assets/logo.png'
+  logoPath = `assets/${environment.cargoType}.png`
   // @ts-ignore
   userInfo = JSON.parse(localStorage.getItem('userInfo'))
 

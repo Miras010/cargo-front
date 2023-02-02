@@ -2,6 +2,7 @@
   //background-color: #EFF3F7;
   background-color: white;
   padding-top: 20px;
+  padding-bottom: 120px;
   margin-top: 100px;
 }
 
@@ -39,15 +40,15 @@
 }
 
 .cardTitle {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 .cardSubTitle {
-  font-size: 16px;
+  font-size: 14px;
   color: gray;
 }
 .cardInfoText {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 .cardSec {
@@ -68,5 +69,5 @@
   color: #495057;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
   border-radius: 6px;
-  font-size: 18px;
+  font-size: 16px;
 }

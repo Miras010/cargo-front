@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {environment} from '../environments/environment'
 
 @Component({
     selector: 'app-registration',
@@ -13,7 +14,7 @@ import {Router} from "@angular/router";
 export class RegistrationComponent implements OnInit {
 
   loginForm: any;
-  logoPath = 'assets/logo.png'
+  logoPath = `assets/${environment.cargoType}.png`
   submitted = false;
   isLoading: boolean = false
 
