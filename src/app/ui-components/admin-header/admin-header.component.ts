@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {environment} from '../../environments/environment'
 
 @Component({
   selector: 'app-admin-header',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-header.component.scss']
 })
 export class AdminHeaderComponent {
-  logoPath = 'assets/logo.png'
+  logoPath = `assets/${environment.cargoType}.png`
 }

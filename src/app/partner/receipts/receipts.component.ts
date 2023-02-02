@@ -15,12 +15,12 @@ import {AdminUsersService} from "../../services/admin/admin-users.service";
   templateUrl: './receipts.component.html',
   styleUrls: ['./receipts.component.scss'],
   styles: [`
-        :host ::ng-deep .p-dialog .product-image {
-            width: 150px;
-            margin: 0 auto 2rem auto;
-            display: block;
-        }
-    `],
+    :host ::ng-deep .p-dialog .product-image {
+      width: 150px;
+      margin: 0 auto 2rem auto;
+      display: block;
+    }
+  `],
   providers: [MessageService,ConfirmationService]
 })
 export class ReceiptsComponent implements OnInit {
@@ -97,8 +97,8 @@ export class ReceiptsComponent implements OnInit {
         this.receipts = resp.resp
         this.totalRecords = resp.totalCount
       }).catch(err => {
-        console.log('err', err)
-     }).finally(() => {
+      console.log('err', err)
+    }).finally(() => {
       this.loading = false
     })
   }
@@ -125,8 +125,8 @@ export class ReceiptsComponent implements OnInit {
         Promise.all(promises)
           .then(() => {
             this.getAll(this.defaultParams)
-          this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Треки удалены', life: 3000});
-        })
+            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Треки удалены', life: 3000});
+          })
           .catch(err => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось удалить трек номер' + err.error.message, life: 3000});
           })

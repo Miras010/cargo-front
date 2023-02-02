@@ -7,6 +7,8 @@ import {Table} from "primeng/table"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
 import * as XLSX from 'xlsx'
 import { startOfMonth, endOfMonth } from 'date-fns'
+// @ts-ignore
+import { getFormattedDate } from '../../functionServices/dataService';
 
 @Component({
   selector: 'app-tracks',
@@ -21,7 +23,6 @@ import { startOfMonth, endOfMonth } from 'date-fns'
     `],
   providers: [MessageService,ConfirmationService]
 })
-
 export class TracksComponent implements OnInit {
   totalRecords: number = 0;
   loading: boolean = false
@@ -45,8 +46,8 @@ export class TracksComponent implements OnInit {
     rows: 10,
     globalFilter: null
   }
+  selectedStatus: any;
   statuses = [
-    { value: 'Дата создания', key: 'createdDate' },
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
     { value: 'Дата отправления в Алматы', key: 'fromChinaToAlmaty' },
     { value: 'Дата получения на складе в Алматы', key: 'receivedInAlmatyDate' },
@@ -58,7 +59,12 @@ export class TracksComponent implements OnInit {
     fromChinaToAlmaty: new FormControl(''),
     receivedInAlmatyDate: new FormControl(''),
     receivedInChinaDate: new FormControl(''),
-    receivedByClient: new FormControl('')
+    receivedByClient: new FormControl(''),
+  })
+
+  addManyForm: FormGroup = new FormGroup({
+    status: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
   })
 
   selectedTracks: Track[] = []
@@ -71,6 +77,10 @@ export class TracksComponent implements OnInit {
 
   ngOnInit() {
     // this.getAllTracks(this.defaultParams)
+  }
+
+  getFormattedDate (date: any) {
+    return getFormattedDate(date).split(' ')[0]
   }
 
   enterFilter() {
@@ -105,10 +115,9 @@ export class TracksComponent implements OnInit {
       .then(resp => {
         this.tracks = resp.resp
         this.totalRecords = resp.totalCount
-        console.log('resp', resp)
       }).catch(err => {
-        console.log('err', err)
-     }).finally(() => {
+      console.log('err', err)
+    }).finally(() => {
       this.loading = false
     })
   }
@@ -139,8 +148,8 @@ export class TracksComponent implements OnInit {
         Promise.all(promises)
           .then(() => {
             this.getAllTracks(this.defaultParams)
-          this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Треки удалены', life: 3000});
-        })
+            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Треки удалены', life: 3000});
+          })
           .catch(err => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось удалить трек номер' + err.error.message, life: 3000});
           })
@@ -159,7 +168,7 @@ export class TracksComponent implements OnInit {
       receivedInChinaDate: new FormControl(track.receivedInChinaDate ? new Date(track.receivedInChinaDate) : ''),
       receivedInAlmatyDate: new FormControl(track.receivedInAlmatyDate ? new Date(track.receivedInAlmatyDate) : ''),
       fromChinaToAlmaty: new FormControl(track.fromChinaToAlmaty ? new Date(track.fromChinaToAlmaty) : ''),
-      receivedByClient: new FormControl(track.receivedByClient ? new Date(track.receivedByClient) : '')
+      receivedByClient: new FormControl(track.receivedByClient ? new Date(track.receivedByClient) : ''),
     })
     console.log(this.trackForm)
     this.productDialog = true;
@@ -192,29 +201,42 @@ export class TracksComponent implements OnInit {
   }
 
   onManySubmit () {
+    if (this.addManyForm.valid) {
       if (this.arraylist.length > 0) {
         // @ts-ignore
         const userId = JSON.parse(localStorage.getItem('userInfo'))._id
-        const newArr = this.arraylist
+        const newArr = this.arraylist.map(item => {
+          let newItem = {
+            trackNumber: ''
+          }
+          // @ts-ignore
+          newItem[this.addManyForm.value.status.key] = this.addManyForm.value.date
+          newItem.trackNumber = item['条码']
+          return newItem
+        })
         console.log('newarr', newArr)
         this.adminTrackService.upsertManyTracks(newArr)
           .toPromise()
           .then((resp) => {
             this.addManyDialog = false
             this.getAllTracks(this.defaultParams)
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно создан', life: 3000});
+            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
             console.log(resp)
           })
           .catch((err) => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать трек номер' + err.error.message, life: 3000});
+            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
           })
       } else {
         this.messageService.add({severity:'info', summary: 'Error', detail: 'Не удалось получить данные с файла', life: 3000})
       }
+    }
   }
 
   onSubmit() {
+    console.log('onsubm2it')
+
     if (this.trackForm.valid) {
+      console.log('onsubmit')
       if (this.editingType === 'new') {
         this.adminTrackService.createTrack(this.trackForm.value).toPromise()
           .then(() => {
@@ -288,7 +310,7 @@ export class TracksComponent implements OnInit {
       let workbook = XLSX.read(bstr, {type:"binary", cellDates: true, dateNF: 'yyyy/mm/dd;@'});
       let first_sheet_name = workbook.SheetNames[0];
       let worksheet = workbook.Sheets[first_sheet_name];
-       // @ts-ignore
+      // @ts-ignore
       this.arraylist = XLSX.utils.sheet_to_json(worksheet,{raw:true})
       console.log('XLSX', this.arraylist);
 
