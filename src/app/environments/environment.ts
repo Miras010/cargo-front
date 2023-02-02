@@ -1,11 +1,11 @@
 export const environment = {
   // ELMIRA
-  apiUrl: 'http://194.110.55.17:5000/api',
-  cargoType: 'logo',
+  // apiUrl: 'http://194.110.55.17:5000/api',
+  // cargoType: 'logo',
 
   // ZHAN
-  // apiUrl: 'http://78.40.108.6:5000/api',
-  // cargoType: 'ZHAN',
+  apiUrl: 'http://78.40.108.6:5000/api',
+  cargoType: 'ZHAN',
 
   // AINAR
   // apiUrl: 'http://78.40.108.106:5000/api',
