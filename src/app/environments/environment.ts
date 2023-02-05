@@ -5,9 +5,9 @@ export const environment = {
   // logoUrl: 'logo.png',
 
   // ZHAN
-  // apiUrl: 'http://78.40.108.6:5000/api',
-  // cargoType: 'ZHAN',
-  // logoUrl: 'ZHAN.jpeg',
+  apiUrl: 'http://78.40.108.6:5000/api',
+  cargoType: 'ZHAN',
+  logoUrl: 'ZHAN.jpeg',
 
 
   // AINAR
@@ -16,9 +16,9 @@ export const environment = {
   // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  apiUrl: 'http://78.40.108.102:5000/api',
-  cargoType: 'DAR',
-  logoUrl: 'DAR.jpeg',
+  // apiUrl: 'http://78.40.108.102:5000/api',
+  // cargoType: 'DAR',
+  // logoUrl: 'DAR.jpeg',
 
 
   // ZIYA
