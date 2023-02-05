@@ -11,14 +11,14 @@ export const environment = {
 
 
   // AINAR
-  apiUrl: 'http://78.40.108.106:5000/api',
-  cargoType: 'AINAR',
-  logoUrl: 'AINAR.jpeg',
+  // apiUrl: 'http://78.40.108.106:5000/api',
+  // cargoType: 'AINAR',
+  // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  // apiUrl: 'http://78.40.108.102:5000/api',
-  // cargoType: 'DAR',
-  // logoUrl: 'DAR.jpeg',
+  apiUrl: 'http://78.40.108.102:5000/api',
+  cargoType: 'DAR',
+  logoUrl: 'DAR.jpeg',
 
 
   // ZIYA
