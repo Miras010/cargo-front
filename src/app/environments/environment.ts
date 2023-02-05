@@ -16,15 +16,15 @@ export const environment = {
   // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  apiUrl: 'http://78.40.108.102:5000/api',
-  cargoType: 'DAR',
-  logoUrl: 'DAR.jpeg',
+  // apiUrl: 'http://78.40.108.102:5000/api',
+  // cargoType: 'DAR',
+  // logoUrl: 'DAR.jpeg',
 
 
   // ZIYA
-  // apiUrl: 'http://195.49.215.227:5000/api',
-  // cargoType: 'ZIYA',
-  // logoUrl: 'ZIYA.jpeg',
+  apiUrl: 'http://195.49.215.227:5000/api',
+  cargoType: 'ZIYA',
+  logoUrl: 'ZIYA.jpeg',
 
 
   // LOCALHOST
