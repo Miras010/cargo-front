@@ -20,3 +20,25 @@
   display: flex;
   justify-content: center
 }
+.block {
+  max-width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.block i {
+  font-size: 22px;
+  //color: #babffd;
+  color: gray;
+  text-decoration: none;
+}
+.block .text {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  //color: #babffd;
+  color: gray;
+
+  text-decoration: none;
+}

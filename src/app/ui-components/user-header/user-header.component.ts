@@ -7,7 +7,7 @@ import {environment} from '../../environments/environment'
   styleUrls: ['./user-header.component.scss']
 })
 export class UserHeaderComponent implements OnInit {
-  logoPath = `assets/${environment.cargoType}.png`
+  logoPath = `assets/${environment.logoUrl}`
   // @ts-ignore
   userInfo = JSON.parse(localStorage.getItem('userInfo'))
 

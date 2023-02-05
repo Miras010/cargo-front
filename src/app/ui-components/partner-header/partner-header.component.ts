@@ -8,5 +8,5 @@ import {environment} from '../../environments/environment'
 })
 
 export class PartnerHeaderComponent {
-  logoPath = `assets/${environment.cargoType}.png`
+  logoPath = `assets/${environment.logoUrl}`
 }

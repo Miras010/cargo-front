@@ -13,7 +13,7 @@ import {environment} from '../environments/environment'
 export class LoginComponent implements OnInit {
 
   loginForm: any;
-  logoPath = `assets/${environment.cargoType}.png`
+  logoPath = `assets/${environment.logoUrl}`
   submitted = false;
   isLoading: boolean = false
 

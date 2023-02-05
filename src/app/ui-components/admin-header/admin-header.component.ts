@@ -7,5 +7,5 @@ import {environment} from '../../environments/environment'
   styleUrls: ['./admin-header.component.scss']
 })
 export class AdminHeaderComponent {
-  logoPath = `assets/${environment.cargoType}.png`
+  logoPath = `assets/${environment.logoUrl}`
 }
