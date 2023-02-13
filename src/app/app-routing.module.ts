@@ -7,6 +7,8 @@ import {UserGuard} from "./guards/user.guard";
 import {LogoutComponent} from "./logout/logout.component";
 import {AdminGuard} from "./guards/admin.guard";
 import {PartnerGuard} from "./guards/partner.guard";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 
 const routes: Routes = [
   {
@@ -20,6 +22,14 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
+  },
+  {
+    path: 'forgot',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset/:token',
+    component: ResetPasswordComponent
   },
   {
     path: 'partner',

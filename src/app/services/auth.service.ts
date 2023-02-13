@@ -67,6 +67,14 @@ export class AuthService {
     return this.http.post(this.fullUrl + '/registration', registerRequest);
   }
 
+  forgotPassword(data: any) {
+    return this.http.post(this.fullUrl + '/forgotPassword', data);
+  }
+
+  resetPassword(data: any) {
+    return this.http.post(this.fullUrl + '/resetPassword', data);
+  }
+
   confirmRegister(phone: string, code: string) {
     return this.http.put(this.fullUrl + '/register/confirm?phone=' + phone + '&registrationCode=' + code, null);
   }

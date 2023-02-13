@@ -22,13 +22,17 @@ export const environment = {
 
 
   // ZIYA
-  apiUrl: 'http://195.49.215.227:5000/api',
-  cargoType: 'ZIYA',
-  logoUrl: 'ZIYA.jpeg',
+  // apiUrl: 'http://195.49.215.227:5000/api',
+  // cargoType: 'ZIYA',
+  // logoUrl: 'ZIYA.jpeg',
 
 
   // LOCALHOST
-  // apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'http://localhost:3000/api',
+  cargoType: 'logo',
+  logoUrl: 'logo.png',
+
+
   production: false,
   apiToken: 'apiToken',
   tokenPrefix: 'Bearer ',

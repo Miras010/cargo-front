@@ -23,13 +23,17 @@ import {DialogComponent} from "./user/dialog/dialog.component";
 import {DialogModule} from "primeng/dialog";
 import {AdminGuard} from "./guards/admin.guard";
 import {PartnerGuard} from "./guards/partner.guard";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    LogoutComponent
+    LogoutComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent
   ],
     imports: [
         AppRoutingModule,

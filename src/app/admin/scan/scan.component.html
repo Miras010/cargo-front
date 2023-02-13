@@ -2,36 +2,16 @@
   <div class="container">
     <p-card>
           <p-toast position="top-center"></p-toast>
-<!--      <div class="field mb-3">-->
-<!--        <label class="mb-2">Статус</label>-->
-<!--        <p-dropdown placeholder="Выберите статус" [(ngModel)]="selectedStatus" [options]="statuses" optionLabel="value"></p-dropdown>-->
-<!--      </div>-->
+      <div class="field mb-3">
+        <label class="mb-2">Статус</label>
+        <p-dropdown placeholder="Выберите статус" [(ngModel)]="selectedStatus" [options]="statuses" optionLabel="value"></p-dropdown>
+      </div>
 
       <div class="field">
         <label class="mb-2">Трек номер</label>
-        <textarea pInputTextarea></textarea>
-        <!--        <input (keydown.enter)="search($event)" pInputText (ngModelChange)="change($event)" [disabled]="isLoading" [(ngModel)]="trackNumber" autofocus />-->
-        <!--              <p-autoComplete formControlName="receiver" [showEmptyMessage]="true" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)" field="name" [minLength]="1"></p-autoComplete>-->
-<!--        <p-autoComplete #inputRef (input)="change($event)" [disabled]="isLoading" [(ngModel)]="trackNumber"></p-autoComplete>-->
-        <button *ngIf="trackList.length > 0" class="mt-3" pButton pRipple type="submit" label="Сохранить" icon="pi pi-check" (click)="submit()"></button>
+        <input (keydown.enter)="enter()" pInputText [(ngModel)]="trackNumber" autofocus />
       </div>
-
-
-
-<!--      <div class="field">-->
-<!--        <label class="mb-2" for="name">Трек номер</label>-->
-<!--        <input #inputRef [disabled]="isLoading" (ngModelChange)="change($event)" [(ngModel)]="trackNumber" type="text" pInputText id="name" autofocus />-->
-<!--      </div>-->
     </p-card>
-    <div class="mt-3"  *ngIf="trackList.length > 0">
-      <p-card>
-        <div *ngFor="let track of trackList; let i = index">
-          <div class="mt-3">{{ i + 1 }}. {{ track.trackNumber }}</div>
-          <hr>
-        </div>
-      </p-card>
-    </div>
-
   </div>
 </div>
 

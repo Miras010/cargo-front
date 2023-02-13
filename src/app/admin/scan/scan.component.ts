@@ -32,12 +32,12 @@ export class ScanComponent implements OnInit {
 
   @ViewChild('inputRef') inputRef: ElementRef | undefined;
 
-  trackList: TrackInfo[] = []
   trackNumber: string = ''
-  selectedStatus: any;
+  selectedStatus = {
+    value: 'Дата получения на складе в Китае',
+    key: 'receivedInChinaDate'
+  }
   isLoading: boolean = false;
-  strArr: string[] = []
-  resultStr: string = ''
 
   statuses = [
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
@@ -50,18 +50,14 @@ export class ScanComponent implements OnInit {
               private messageService: MessageService) { }
 
   ngOnInit() {
-    // this.inputRef?.nativeElement.focus()
-    // this.getAllTracks(this.defaultParams)
   }
 
   updateTrack (data: any) {
       this.isLoading = true
       this.adminTrackService.upsertManyTracks(data)
         .toPromise()
-        .then((resp) => {
+        .then(() => {
           this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
-          console.log(resp)
-          this.trackList = []
           // setTimeout(() => {
           //   window.location.reload();
           // }, 1000)
@@ -69,41 +65,18 @@ export class ScanComponent implements OnInit {
         .catch((err) => {
           this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
         }).finally(() => {
-          this.trackNumber = ''
         this.isLoading = false
       })
   }
 
-  change (event: any) {
-    console.log('event', event)
-    this.strArr.push(event)
-    console.log('strArr', this.strArr)
-    if (this.strArr.length > 2) {
-      if (this.strArr[this.strArr.length - 1].includes(this.strArr[this.strArr.length - 2])) {
-        console.log('continue')
-        this.resultStr = this.strArr[this.strArr.length - 1]
-      } else {
-        console.log('its diff')
-      }
-    }
-    // if (this.trackNumber.length > 0) {
-    //   const filtered = this.trackList.filter(track => this.trackNumber === track.trackNumber)
-    //   if (filtered.length === 0) {
-    //     let data = {
-    //       trackNumber: this.trackNumber,
-    //       receivedInAlmatyDate: new Date(Date.now())
-    //     }
-    //     this.trackList.push(data)
-    //   }
-    //   this.trackNumber = ''
-    // }
+  enter() {
+    let data = {}
+    // @ts-ignore
+    data[this.selectedStatus.key] = Date.now()
+    // @ts-ignore
+    data['trackNumber'] = this.trackNumber
+    this.updateTrack([data])
+    this.trackNumber = ''
   }
 
-  search(ev: any) {
-    console.log('ev', ev)
-  }
-
-  submit() {
-    this.updateTrack(this.trackList)
-  }
 }
