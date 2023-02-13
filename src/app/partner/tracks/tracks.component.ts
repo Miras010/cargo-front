@@ -15,12 +15,12 @@ import { getFormattedDate } from '../../functionServices/dataService';
   templateUrl: './tracks.component.html',
   styleUrls: ['./tracks.component.scss'],
   styles: [`
-        :host ::ng-deep .p-dialog .product-image {
-            width: 150px;
-            margin: 0 auto 2rem auto;
-            display: block;
-        }
-    `],
+    :host ::ng-deep .p-dialog .product-image {
+      width: 150px;
+      margin: 0 auto 2rem auto;
+      display: block;
+    }
+  `],
   providers: [MessageService,ConfirmationService]
 })
 export class TracksComponent implements OnInit {
@@ -111,7 +111,7 @@ export class TracksComponent implements OnInit {
 
   getAllTracks (params: any) {
     this.loading = true
-    this.adminTrackService.getAllPartnerTracks(params).toPromise()
+    this.adminTrackService.getAllTracks(params).toPromise()
       .then(resp => {
         this.tracks = resp.resp
         this.totalRecords = resp.totalCount

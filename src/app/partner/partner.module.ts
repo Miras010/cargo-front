@@ -23,6 +23,7 @@ import {PartnerHeaderComponent} from "../ui-components/partner-header/partner-he
 import {CalendarModule} from "primeng/calendar";
 import {ReceiptsComponent} from "./receipts/receipts.component";
 import {AutoCompleteModule} from "primeng/autocomplete";
+import {ScanComponent} from "./scan/scan.component";
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import {AutoCompleteModule} from "primeng/autocomplete";
     PartnerComponent,
     TracksComponent,
     PartnerHeaderComponent,
-    ReceiptsComponent
+    ReceiptsComponent,
+    ScanComponent
   ]
 })
 

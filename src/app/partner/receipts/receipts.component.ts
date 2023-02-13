@@ -11,7 +11,7 @@ import {AdminReceiptsService} from "../../services/admin/admin-receipts.service"
 import {AdminUsersService} from "../../services/admin/admin-users.service";
 
 @Component({
-  selector: 'app-receipts',
+  selector: 'app-tracks',
   templateUrl: './receipts.component.html',
   styleUrls: ['./receipts.component.scss'],
   styles: [`
@@ -92,7 +92,7 @@ export class ReceiptsComponent implements OnInit {
 
   getAll (params: any) {
     this.loading = true
-    this.adminReceiptsService.getAllPartnerTracks(params).toPromise()
+    this.adminReceiptsService.getAll(params).toPromise()
       .then(resp => {
         this.receipts = resp.resp
         this.totalRecords = resp.totalCount

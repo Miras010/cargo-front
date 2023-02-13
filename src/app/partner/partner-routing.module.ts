@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PartnerComponent } from './partner.component';
 import {TracksComponent} from "./tracks/tracks.component";
 import {ReceiptsComponent} from "./receipts/receipts.component";
+import {ScanComponent} from "./scan/scan.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     {
       path: 'receipts',
       component: ReceiptsComponent
+    },
+    {
+      path: 'scan',
+      component: ScanComponent
     },
     {
       path: '**',
