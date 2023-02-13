@@ -5,6 +5,19 @@ import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {environment} from '../environments/environment'
 
+
+function validateWhiteSpace(control: FormControl) {
+    if (control.value.includes(' ')) {
+      return {
+        username: {
+          valid: false
+        }
+      }
+    }
+    return null
+}
+
+
 @Component({
     selector: 'app-registration',
     templateUrl: './registration.component.html',
@@ -29,8 +42,8 @@ export class RegistrationComponent implements OnInit {
       name: new FormControl('', Validators.required),
       surname: new FormControl('', Validators.required),
       phoneNumber: new FormControl('', Validators.required),
-      mail: new FormControl('', Validators.required),
-      username: new FormControl('', Validators.required),
+      mail: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required, validateWhiteSpace]),
       password: new FormControl('', Validators.required)
     })
   }
