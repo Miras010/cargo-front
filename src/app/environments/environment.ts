@@ -1,8 +1,8 @@
 export const environment = {
   // ELMIRA
-  // apiUrl: 'http://194.110.55.17:5000/api',
-  // cargoType: 'logo',
-  // logoUrl: 'logo.png',
+  apiUrl: 'http://194.110.55.17:5000/api',
+  cargoType: 'logo',
+  logoUrl: 'logo.png',
 
   // ZHAN
   // apiUrl: 'http://78.40.108.6:5000/api',
@@ -28,9 +28,9 @@ export const environment = {
 
 
   // LOCALHOST
-  apiUrl: 'http://localhost:3000/api',
-  cargoType: 'logo',
-  logoUrl: 'logo.png',
+  // apiUrl: 'http://localhost:3000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'logo.png',
 
 
   production: false,
