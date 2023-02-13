@@ -49,18 +49,23 @@ export class TracksComponent implements OnInit {
   }
 
   getBackground (item: any) {
-    if (item.track.receivedInAlmatyDate) {
+    if (item.track.receivedByClient) {
+      return '#c9d2f1'
+    } else if (item.track.receivedInAlmatyDate) {
       return '#34f55f'
     } else if (item.track.fromChinaToAlmaty) {
       return '#ffe94e'
     } else if (item.track.receivedInChinaDate) {
-      return '#e0e0e0'
+      return '#e8aaaa'
     }
-    return '#ffffff'
+    return '#dedede'
   }
 
   getTypeText(item: any) {
-    if (item.track.receivedInAlmatyDate) {
+    if (item.track.receivedByClient) {
+      const date = getFormattedDate(item.track.receivedInAlmatyDate).split(' ')[0]
+      return 'получено клиентом' + ' - ' + date
+    } else if (item.track.receivedInAlmatyDate) {
       const date = getFormattedDate(item.track.receivedInAlmatyDate).split(' ')[0]
       return 'в Алматы' + ' - ' + date
     } else if (item.track.fromChinaToAlmaty) {
@@ -70,7 +75,7 @@ export class TracksComponent implements OnInit {
       const date = getFormattedDate(item.track.receivedInChinaDate).split(' ')[0]
       return 'на складе в Китае' + ' - ' + date
     }
-    return ''
+    return 'добавлено'
   }
 
   cardClick(item: any) {
