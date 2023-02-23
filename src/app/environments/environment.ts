@@ -5,9 +5,9 @@ export const environment = {
   // logoUrl: 'logo.png',
 
   // ZHAN
-  // apiUrl: 'http://78.40.108.6:5000/api',
-  // cargoType: 'ZHAN',
-  // logoUrl: 'ZHAN.jpeg',
+  apiUrl: 'http://78.40.108.6:5000/api',
+  cargoType: 'ZHAN',
+  logoUrl: 'ZHAN.jpeg',
 
 
   // AINAR
@@ -22,9 +22,9 @@ export const environment = {
 
 
   // ZIYA
-  apiUrl: 'http://195.49.215.227:5000/api',
-  cargoType: 'ZIYA',
-  logoUrl: 'ZIYA.jpeg',
+  // apiUrl: 'http://195.49.215.227:5000/api',
+  // cargoType: 'ZIYA',
+  // logoUrl: 'ZIYA.jpeg',
 
   // GGG
   // apiUrl: 'http://195.49.212.219:5000/api',
