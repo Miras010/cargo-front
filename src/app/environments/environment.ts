@@ -1,8 +1,8 @@
 export const environment = {
   // ELMIRA
-  apiUrl: 'http://194.110.55.17:5000/api',
-  cargoType: 'logo',
-  logoUrl: 'logo.png',
+  // apiUrl: 'http://194.110.55.17:5000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'logo.png',
 
   // ZHAN
   // apiUrl: 'http://78.40.108.6:5000/api',
@@ -27,9 +27,9 @@ export const environment = {
   // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  // apiUrl: 'http://195.49.212.219:5000/api',
-  // cargoType: 'GGG',
-  // logoUrl: 'ggg.jpeg',
+  apiUrl: 'http://195.49.212.219:5000/api',
+  cargoType: 'GGG',
+  logoUrl: 'ggg.jpeg',
 
 
   // LOCALHOST
