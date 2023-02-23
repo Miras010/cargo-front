@@ -10,6 +10,15 @@
             <input class="form-control" id="float-input" type="text" pInputText formControlName="username" name="login">
             <label for="float-input">Логин</label>
           </div>
+          <div *ngIf="loginForm.controls.username.invalid && (loginForm.controls.username.dirty || loginForm.controls.username.touched)"
+               style="font-size: 12px; margin: 10px 0 0 10px;">
+            <div *ngIf="loginForm.controls.username.errors?.['required']">
+              Заполните поле
+            </div>
+            <div *ngIf="loginForm.controls.username.errors?.['hasWhiteSpace']">
+              Уберите пробел
+            </div>
+          </div>
           <div class="p-float-label w-100 mt-4">
             <input class="form-control" id="name" type="text" pInputText formControlName="name" name="name">
             <label for="name">Имя</label>
@@ -21,6 +30,15 @@
           <div class="p-float-label w-100 mt-4">
             <input class="form-control" id="mail" type="mail" pInputText formControlName="mail" name="mail">
             <label for="mail">Почта</label>
+          </div>
+          <div *ngIf="loginForm.controls.mail.invalid && (loginForm.controls.mail.dirty || loginForm.controls.mail.touched)"
+               style="font-size: 12px; margin: 10px 0 0 10px;">
+            <div *ngIf="loginForm.controls.mail.errors?.['required']">
+              Заполните поле
+            </div>
+            <div *ngIf="loginForm.controls.mail.errors?.['email']">
+              Укажите почту по формату mail@mail (убедитесь, что нет пробелов)
+            </div>
           </div>
           <div class="p-float-label w-100 mt-4">
             <p-inputMask formControlName="phoneNumber" mask="+9 (999) 999-99-99"></p-inputMask>

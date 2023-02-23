@@ -9,9 +9,7 @@ import {environment} from '../environments/environment'
 function validateWhiteSpace(control: FormControl) {
     if (control.value.includes(' ')) {
       return {
-        username: {
-          valid: false
-        }
+          hasWhiteSpace: true
       }
     }
     return null
@@ -43,8 +41,8 @@ export class RegistrationComponent implements OnInit {
       surname: new FormControl('', Validators.required),
       phoneNumber: new FormControl('', Validators.required),
       mail: new FormControl('', [Validators.required, Validators.email]),
-      // username: new FormControl('', [Validators.required, validateWhiteSpace]),
-      username: new FormControl('', Validators.required),
+      username: new FormControl('', [Validators.required, validateWhiteSpace]),
+      // username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     })
   }
