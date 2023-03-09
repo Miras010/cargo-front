@@ -215,17 +215,36 @@ export class TracksComponent implements OnInit {
           return newItem
         })
         console.log('newarr', newArr)
-        this.adminTrackService.upsertManyTracks(newArr)
-          .toPromise()
-          .then((resp) => {
-            this.addManyDialog = false
-            this.getAllTracks(this.defaultParams)
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
-            console.log(resp)
-          })
+        let promises = []
+        if (newArr.length > 300) {
+          let index = Math.ceil(newArr.length / 300)
+          for (let i = 1; i <= index; i++) {
+            console.log(newArr.slice((i - 1) * 300, i * 300))
+            promises.push(this.adminTrackService.upsertManyTracks(newArr.slice((i - 1) * 300, i * 300)).toPromise())
+          }
+        } else {
+          promises.push(this.adminTrackService.upsertManyTracks(newArr).toPromise())
+        }
+        Promise.all(promises).then((resp) => {
+          this.addManyDialog = false
+          this.getAllTracks(this.defaultParams)
+          this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
+          console.log(resp)
+        })
           .catch((err) => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
           })
+        // this.adminTrackService.upsertManyTracks(newArr)
+        //   .toPromise()
+        //   .then((resp) => {
+        //     this.addManyDialog = false
+        //     this.getAllTracks(this.defaultParams)
+        //     this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
+        //     console.log(resp)
+        //   })
+        //   .catch((err) => {
+        //     this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
+        //   })
       } else {
         this.messageService.add({severity:'info', summary: 'Error', detail: 'Не удалось получить данные с файла', life: 3000})
       }

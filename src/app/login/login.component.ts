@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {MessageService, PrimeNGConfig} from "primeng/api";
 import {Router} from "@angular/router";
-import {environment} from '../environments/environment'
+import {environment} from '../../environments/environment'
 
 @Component({
     selector: 'app-login',

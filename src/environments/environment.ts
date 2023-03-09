@@ -11,9 +11,9 @@ export const environment = {
 
 
   // AINAR
-  apiUrl: 'http://78.40.108.106:5000/api',
-  cargoType: 'AINAR',
-  logoUrl: 'AINAR.jpeg',
+  // apiUrl: 'http://78.40.108.106:5000/api',
+  // cargoType: 'AINAR',
+  // logoUrl: 'AINAR.jpeg',
 
   // DAR
   // apiUrl: 'http://78.40.108.102:5000/api',
@@ -33,9 +33,9 @@ export const environment = {
 
 
   // LOCALHOST
-  // apiUrl: 'http://localhost:3000/api',
-  // cargoType: 'logo',
-  // logoUrl: 'logo.png',
+  apiUrl: 'http://localhost:3000/api',
+  cargoType: 'logo',
+  logoUrl: 'logo.png',
 
 
   production: false,

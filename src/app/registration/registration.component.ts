@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
-import {environment} from '../environments/environment'
+import {environment} from '../../environments/environment'
 
 
 function validateWhiteSpace(control: FormControl) {
