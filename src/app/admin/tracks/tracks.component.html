@@ -178,7 +178,7 @@
         </ng-template>
         <ng-template pTemplate="footer">
           <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideManyDialog()"></button>
-          <button pButton pRipple type="submit" label="Save" icon="pi pi-check" (click)="onManySubmit()" class="p-button-text"></button>
+          <button [disabled]="loading" pButton pRipple type="submit" label="Save" icon="pi pi-check" (click)="onManySubmit()" class="p-button-text"></button>
         </ng-template>
       </p-dialog>
 

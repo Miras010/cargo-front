@@ -27,15 +27,15 @@ export const environment = {
   // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  // apiUrl: 'http://195.49.212.219:5000/api',
-  // cargoType: 'GGG',
-  // logoUrl: 'ggg.jpeg',
+  apiUrl: 'http://195.49.212.219:5000/api',
+  cargoType: 'GGG',
+  logoUrl: 'ggg.jpeg',
 
 
   // LOCALHOST
-  apiUrl: 'http://localhost:3000/api',
-  cargoType: 'logo',
-  logoUrl: 'logo.png',
+  // apiUrl: 'http://localhost:3000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'logo.png',
 
 
   production: false,

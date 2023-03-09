@@ -202,6 +202,7 @@ export class TracksComponent implements OnInit {
 
   onManySubmit () {
     if (this.addManyForm.valid) {
+      this.loading = true
       if (this.arraylist.length > 0) {
         // @ts-ignore
         const userId = JSON.parse(localStorage.getItem('userInfo'))._id
@@ -225,14 +226,17 @@ export class TracksComponent implements OnInit {
         } else {
           promises.push(this.adminTrackService.upsertManyTracks(newArr).toPromise())
         }
-        Promise.all(promises).then((resp) => {
-          this.addManyDialog = false
-          this.getAllTracks(this.defaultParams)
-          this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
-          console.log(resp)
-        })
+        Promise.all(promises)
+          .then((resp) => {
+            this.addManyDialog = false
+            this.getAllTracks(this.defaultParams)
+            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
+            console.log(resp)
+          })
           .catch((err) => {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать (обновить)' + err.error.message, life: 3000});
+          }).finally(() => {
+            this.loading = true
           })
         // this.adminTrackService.upsertManyTracks(newArr)
         //   .toPromise()
