@@ -5,10 +5,14 @@ export const environment = {
   // logoUrl: 'ZHAPPAR.png',
 
   // ZHAN
-  apiUrl: 'http://78.40.108.6:5000/api',
-  cargoType: 'ZHAN',
-  logoUrl: 'ZHAN.jpeg',
+  // apiUrl: 'http://78.40.108.6:5000/api',
+  // cargoType: 'ZHAN',
+  // logoUrl: 'ZHAN.jpeg',
 
+  // MARRY
+  apiUrl: 'http://185.22.64.100/api',
+  cargoType: 'MARRY',
+  logoUrl: 'MARRY.jpeg',
 
   // AINAR
   // apiUrl: 'http://78.40.108.106:5000/api',
