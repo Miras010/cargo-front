@@ -10,7 +10,7 @@ export const environment = {
   // logoUrl: 'ZHAN.jpeg',
 
   // MARRY
-  apiUrl: 'http://185.22.64.100/api',
+  apiUrl: 'http://185.22.64.100:5000/api',
   cargoType: 'MARRY',
   logoUrl: 'MARRY.jpeg',
 
