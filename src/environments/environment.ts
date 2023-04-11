@@ -46,6 +46,10 @@ export const environment = {
   cargoType: 'logo',
   logoUrl: 'logo.png',
 
+  // AKS
+  apiUrl: 'https://aks-cargo.kz:5000/api',
+  cargoType: 'AKS',
+  logoUrl: 'aks.jpg',
 
   production: false,
   apiToken: 'apiToken',
