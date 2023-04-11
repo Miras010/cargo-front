@@ -36,20 +36,14 @@ export const environment = {
   // logoUrl: 'ggg.jpeg',
 
   // AKS
-  // apiUrl: 'https://aks-cargo.kz:5000/api',
-  // cargoType: 'AKS',
-  // logoUrl: 'aks.jpg',
-
-
-  // LOCALHOST
-  apiUrl: 'http://localhost:5000/api',
-  cargoType: 'logo',
-  logoUrl: 'logo.png',
-
-  // AKS
   apiUrl: 'https://aks-cargo.kz:5000/api',
   cargoType: 'AKS',
   logoUrl: 'aks.jpg',
+
+  // LOCALHOST
+  // apiUrl: 'http://localhost:5000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'logo.png',
 
   production: false,
   apiToken: 'apiToken',
