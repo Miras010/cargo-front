@@ -49,6 +49,12 @@ export class AdminUsersService {
     })
   }
 
+  public changePassword (data: any): Observable<any> {
+    return this.http.put(this.fullUrl + '/changePassword', data, {
+      headers: this.headers
+    })
+  }
+
   public deleteUser (trackId: string): Observable<any> {
     return this.http.post(this.fullUrl + '/delete/' + trackId, '', {
       headers: this.headers

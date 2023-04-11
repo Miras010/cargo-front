@@ -48,7 +48,7 @@
                  [loading]="loading"
                  [rowsPerPageOptions]="[10,25,50]"
                  dataKey="_id"
-                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" >
+                 currentPageReportTemplate="Показано от {first} до {last} из {totalRecords} всех записей" [showCurrentPageReport]="true" >
           <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
               <span class="p-input-icon-left">
@@ -63,10 +63,10 @@
               <th style="width: 4rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="receiver">Получатель<p-sortIcon field="receiver"></p-sortIcon></th>
-              <th pSortableColumn="weight">Вес<p-sortIcon field="weight"></p-sortIcon></th>
-              <th pSortableColumn="totalSum">Сумма<p-sortIcon field="totalSum"></p-sortIcon></th>
-              <th pSortableColumn="totalNumber">Кол-во треков<p-sortIcon field="totalNumber"></p-sortIcon></th>
+              <th pSortableColumn="receiver">Получатель</th>
+              <th pSortableColumn="weight">Вес</th>
+              <th pSortableColumn="totalSum">Сумма</th>
+              <th pSortableColumn="totalNumber">Кол-во треков</th>
               <th></th>
             </tr>
 <!--            <tr>-->

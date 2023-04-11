@@ -22,6 +22,7 @@ import {AdminUsersService} from "../../services/admin/admin-users.service";
 })
 export class UsersComponent implements OnInit {
   productDialog: any;
+  changePasswordDialog: boolean = false
   editingType: string = ''
   users: User[] = []
   loading: boolean = false
@@ -37,6 +38,12 @@ export class UsersComponent implements OnInit {
     password: new FormControl('', Validators.required),
     roles: new FormControl(null),
     isActive: new FormControl('false')
+  })
+
+  changePasswordForm: FormGroup = new FormGroup({
+    _id: new FormControl(''),
+    password: new FormControl('', Validators.required),
+    confirmPassword: new FormControl('', Validators.required),
   })
 
   roles = [
@@ -134,6 +141,14 @@ export class UsersComponent implements OnInit {
     this.productDialog = true;
   }
 
+  openChangePassword(user: User) {
+    this.changePasswordForm.patchValue({
+      _id: user._id
+    })
+    console.log('user._id', user._id)
+    this.changePasswordDialog = true;
+  }
+
   deleteProduct(user: User) {
     this.confirmationService.confirm({
       message: 'Вы уверены что хотите удалить ' + user.username + '?',
@@ -154,6 +169,10 @@ export class UsersComponent implements OnInit {
 
   hideDialog() {
     this.productDialog = false;
+  }
+
+  hidePasswordDialog() {
+    this.changePasswordDialog = false;
   }
 
   onSubmit() {
@@ -184,6 +203,26 @@ export class UsersComponent implements OnInit {
             this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось обновить' + err, life: 3000});
             console.log(err)
           })
+      }
+    }
+  }
+
+  changePassword() {
+    if (this.changePasswordForm.valid) {
+      const values = this.changePasswordForm.getRawValue()
+      if (values.password === values.confirmPassword) {
+        this.adminUsersService.changePassword({ _id: values._id, password: values.password }).toPromise()
+          .then(() => {
+            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Пользователь успешно обновлен', life: 3000});
+            this.changePasswordDialog = false
+            this.getAllUsers(this.defaultParams)
+          })
+          .catch((err) => {
+            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось обновить' + err, life: 3000});
+            console.log(err)
+          })
+      } else {
+        this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Пароли не совпадают', life: 3000});
       }
     }
   }

@@ -6,12 +6,12 @@
           <div class="loginForm container">
             <img class="logo" [src]="logoPath" alt="logotype">
             <div class="p-float-label w-100 mt-4">
-              <input class="form-control" id="float-input" type="text" pInputText formControlName="login" name="login">
-              <label for="float-input">Логин</label>
+              <p-inputMask styleClass="yourclass" formControlName="phoneNumber" mask="+9 (999) 999-99-99"></p-inputMask>
+              <label>Номер телефона</label>
             </div>
             <div class="p-float-label w-100 mt-4 mb-3">
               <input class="form-control" id="password" type="password" pInputText formControlName="password" name="password">
-              <label for="float-input">Пароль</label>
+              <label for="password">Пароль</label>
             </div>
             <button [disabled]="isLoading" pButton type="submit">Авторизоваться</button>
             <div class="mt-4">

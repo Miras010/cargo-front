@@ -19,7 +19,7 @@
 }
 .loginCard {
   border-radius: 23px;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .p-card-title {
@@ -48,6 +48,15 @@
   background-color: #9090fa;
   transition: 0.2s linear;
 }
+.p-inputtext {
+  width: 100% !important;
+}
 .logo {
   width: 200px;
+}
+.yourclass {
+  display: block;
+}
+.pinputtext {
+  width: 100% !important;
 }
