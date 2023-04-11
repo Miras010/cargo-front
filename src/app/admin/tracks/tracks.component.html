@@ -51,7 +51,7 @@
                  [loading]="loading"
                  [rowsPerPageOptions]="[10,25,50]"
                  dataKey="_id"
-                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" >
+                 currentPageReportTemplate="Показано от {first} до {last} из {totalRecords} всех записей" [showCurrentPageReport]="true" >
           <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
               <span class="p-input-icon-left">
@@ -66,12 +66,12 @@
               <th style="width: 4rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="trackNumber" style="min-width:15rem">Трек номер<p-sortIcon field="trackNumber"></p-sortIcon></th>
-              <th pSortableColumn="createdDate">Дата создания<p-sortIcon field="createdDate"></p-sortIcon></th>
-              <th pSortableColumn="receivedInChinaDate">ДП на складе в Китае<p-sortIcon field="receivedInChinaDate"></p-sortIcon></th>
-              <th pSortableColumn="fromChinaToAlmaty">Отправлено с Китая в Алматы<p-sortIcon field="fromChinaToAlmaty"></p-sortIcon></th>
-              <th pSortableColumn="receivedInAlmatyDate">ДП на складе в Алматы<p-sortIcon field="receivedInAlmatyDate"></p-sortIcon></th>
-              <th pSortableColumn="receivedByClient">Получено клиентом<p-sortIcon field="receivedByClient"></p-sortIcon></th>
+              <th pSortableColumn="trackNumber" style="min-width:15rem">Трек номер</th>
+              <th pSortableColumn="createdDate">Дата создания</th>
+              <th pSortableColumn="receivedInChinaDate">ДП на складе в Китае</th>
+              <th pSortableColumn="fromChinaToAlmaty">Отправлено с Китая в Алматы</th>
+              <th pSortableColumn="receivedInAlmatyDate">ДП на складе в Алматы</th>
+              <th pSortableColumn="receivedByClient">Получено клиентом</th>
               <th></th>
             </tr>
             <!--            <tr>-->
@@ -116,11 +116,6 @@
                 </div>
               </td>
             </tr>
-          </ng-template>
-          <ng-template pTemplate="summary">
-            <div class="flex align-items-center justify-content-between">
-              Общее кол-во треков {{tracks ? tracks.length : 0 }}.
-            </div>
           </ng-template>
         </p-table>
       </div>
