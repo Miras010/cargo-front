@@ -1,5 +1,9 @@
 export const environment = {
-  apiUrl: 'http://89.219.13.211:8085',
+// AKS
+  apiUrl: 'http://100.22.65.65:5000/api',
+  cargoType: 'AKS',
+  logoUrl: 'aks.jpg',
+
   production: false,
   apiToken: 'apiToken',
   tokenPrefix: 'Bearer ',

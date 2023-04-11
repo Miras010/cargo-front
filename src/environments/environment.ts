@@ -15,9 +15,9 @@ export const environment = {
   // logoUrl: 'MARRY.jpeg',
 
   // AINAR
-  apiUrl: 'http://78.40.108.106:5000/api',
-  cargoType: 'AINAR',
-  logoUrl: 'AINAR.jpeg',
+  // apiUrl: 'http://78.40.108.106:5000/api',
+  // cargoType: 'AINAR',
+  // logoUrl: 'AINAR.jpeg',
 
   // DAR
   // apiUrl: 'http://78.40.108.102:5000/api',
@@ -41,6 +41,10 @@ export const environment = {
   // cargoType: 'logo',
   // logoUrl: 'logo.png',
 
+  // AKS
+  apiUrl: 'http://185.22.65.65:5000/api',
+  cargoType: 'AKS',
+  logoUrl: 'aks.jpg',
 
   production: false,
   apiToken: 'apiToken',
