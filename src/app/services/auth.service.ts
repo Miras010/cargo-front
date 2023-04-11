@@ -24,8 +24,11 @@ export class AuthService {
               private messageService: MessageService) {
   }
 
-  authorize = (perf: any) => {
+  authorize = (perf: any, inputData: any) => {
     this.authorized.next(true);
+    localStorage.setItem('lastPhoneNumber', inputData.phoneNumber);
+    localStorage.setItem('lastPassword', inputData.password);
+
     localStorage.setItem(environment.apiToken, perf.token);
     localStorage.setItem('userInfo', JSON.stringify(perf.userInfo));
     perf.roles.forEach((role: string) => {
@@ -40,7 +43,6 @@ export class AuthService {
         localStorage.setItem(environment.rolePath, 'partner');
       }
     })
-    console.log('asdasd')
     if (localStorage.getItem(environment.rolePath) === 'partner') {
       this.router.navigate(['partner']);
     } else if (localStorage.getItem(environment.rolePath) === 'user') {
@@ -50,8 +52,12 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(this.fullUrl + '/login', {username, password});
+  login(data: any): Observable<any> {
+    return this.http.post(this.fullUrl + '/login', data);
+  }
+
+  loginByPhone(data: any): Observable<any> {
+    return this.http.post(this.fullUrl + '/loginByPhone', data);
   }
 
   // currentUser(token: string): Observable<any> {
@@ -114,8 +120,25 @@ export class AuthService {
 
   public logout() {
     this.authorized.next(false);
+    const lastPhoneNumber = localStorage.getItem('lastPhoneNumber')
+    const lastPassword =  localStorage.getItem('lastPassword')
     localStorage.clear();
+    if (lastPhoneNumber) {
+      localStorage.setItem('lastPhoneNumber', lastPhoneNumber)
+    }
+    if (lastPassword) {
+      localStorage.setItem('lastPassword', lastPassword)
+    }
     this.router.navigate(['/login']);
+  }
+
+  public getLastInputData() {
+    const lastPhoneNumber = localStorage.getItem('lastPhoneNumber')
+    const lastPassword =  localStorage.getItem('lastPassword')
+    if (lastPhoneNumber && lastPassword) {
+      return { lastPhoneNumber, lastPassword }
+    }
+    return null
   }
 
   // getMyRole() {

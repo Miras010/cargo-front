@@ -8,7 +8,8 @@ import {environment} from '../../environments/environment'
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    styleUrls: ['./login.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
 
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   logoPath = `assets/${environment.logoUrl}`
   submitted = false;
   isLoading: boolean = false
+  lastInputData: any
 
   constructor(private authService: AuthService,
               private messageService: MessageService,
@@ -25,19 +27,35 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.authService.logout()
     this.loginForm = new FormGroup({
-      login: new FormControl('', Validators.required),
+      phoneNumber: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
+    this.getLastInputData()
+  }
+
+  getLastInputData() {
+    const lastInputData = this.authService.getLastInputData()
+    if (lastInputData) {
+      this.lastInputData = lastInputData
+      this.loginForm.patchValue({
+        phoneNumber: lastInputData.lastPhoneNumber,
+        password: lastInputData.lastPassword,
+      })
+    }
   }
 
   onSubmit() {
     this.submitted = true
     if (this.loginForm.valid) {
       this.isLoading = true
-      this.authService.login(this.loginForm.value.login, this.loginForm.value.password)
+      const symbols = ['+', '(', ')', ' ', '-']
+      symbols.forEach(symbol => {
+        this.loginForm.value.phoneNumber = this.loginForm.value.phoneNumber.replaceAll(symbol, '')
+      })
+      this.authService.loginByPhone(this.loginForm.value)
         .toPromise()
         .then(res => {
-          this.authService.authorize(res)
+          this.authService.authorize(res, {phoneNumber: this.loginForm.value.phoneNumber, password: this.loginForm.value.password})
         }).catch((err) => {
         console.log(err);
         this.messageService.add({severity:'error', summary: 'Ошибка', detail: err.error.message, life: 3000});

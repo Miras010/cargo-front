@@ -1,8 +1,6 @@
 <div class="trackCard">
   <div class="container">
-    <p-card>
       <p-toast position="top-center"></p-toast>
-
       <div class="card">
         <p-toolbar styleClass="mb-4 gap-2">
           <ng-template pTemplate="left">
@@ -43,7 +41,7 @@
             <div class="flex align-items-center justify-content-between">
               <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="filterGlobal(dt, $event, 'contains')" placeholder="Искать по трек номеру..." />
+                    <input pInputText type="text" (input)="filterGlobal(dt, $event, 'contains')" placeholder="Искать" />
                 </span>
             </div>
           </ng-template>
@@ -75,6 +73,7 @@
               <td>
                 <div class="d-flex">
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-1" (click)="edit(user)"></button>
+                  <button pButton pRipple icon="pi pi-password" class="p-button-rounded p-button-success mx-1" (click)="openChangePassword(user)"></button>
                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(user)"></button>
                 </div>
               </td>
@@ -131,9 +130,28 @@
         </ng-template>
       </p-dialog>
 
+    <p-dialog [(visible)]="changePasswordDialog" [style]="{width: '450px'}" header="Пользователь" [modal]="true" styleClass="p-fluid">
+      <ng-template pTemplate="content">
+        <form [formGroup]="changePasswordForm">
+          <div class="p-float-label w-100 mt-4 mb-2">
+            <input class="form-control" id="password2" type="password" pInputText formControlName="password" name="password">
+            <label>Пароль</label>
+          </div>
+          <div class="p-float-label w-100 mt-4 mb-2">
+            <input class="form-control" id="password3" type="password" pInputText formControlName="confirmPassword" name="password">
+            <label>Повторите пароль</label>
+          </div>
+        </form>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hidePasswordDialog()"></button>
+        <button pButton pRipple type="submit" label="Save" icon="pi pi-check" (click)="changePassword()" class="p-button-text"></button>
+      </ng-template>
+    </p-dialog>
+
       <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
-    </p-card>
   </div>
 
 </div>
