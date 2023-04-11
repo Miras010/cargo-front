@@ -42,7 +42,7 @@ export const environment = {
   // logoUrl: 'logo.png',
 
   // AKS
-  apiUrl: 'http://185.22.65.65:5000/api',
+  apiUrl: 'https://aks-cargo.kz:5000/api',
   cargoType: 'AKS',
   logoUrl: 'aks.jpg',
 
