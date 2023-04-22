@@ -38,17 +38,54 @@
   font-size: 25px;
   font-weight: 600;
 }
-
+.cardHeader {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
 .cardTitle {
+  font-size: 18px;
+  font-weight: 500;
+}
+.cardBody {
+  padding: 15px;
+}
+.cardDesc {
+  color: gray;
   font-size: 18px;
   font-weight: 500;
 }
 .cardSubTitle {
   font-size: 14px;
-  color: gray;
+  color: #868686;
 }
 .cardInfoText {
   font-size: 14px;
+  //font-weight: 600;
+}
+.cardSec {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.trackList i {
+  color: #3B82F6;
+}
+
+.card {
+  background: #ffffff;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.cardTitle {
+  font-size: 22px;
   font-weight: 600;
 }
 .cardSec {
@@ -57,17 +94,8 @@
   align-items: center;
 }
 .iconSec {
-  margin-right: 25px;
+  margin-right: 10px;
 }
-.trackList i {
-  color: #3B82F6;
-}
-
-.card {
-  padding: 20px;
-  background: #ffffff;
-  color: #495057;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-  border-radius: 6px;
-  font-size: 16px;
+.iconSec i {
+  color: #3B82F6 !important;
 }

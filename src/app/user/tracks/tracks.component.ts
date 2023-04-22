@@ -48,17 +48,47 @@ export class TracksComponent implements OnInit {
     })
   }
 
+  getFormattedDate (date: Date) {
+    return getFormattedDate(date).split(' ')[0]
+  }
+
+  deleteTrack (item: any) {
+    this.confirmationService.confirm({
+      message: 'Вы уверены что хотите удалить ' + item.track.trackNumber + '?',
+      header: 'Подтверждение',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.trackService.unfollowTrack(item._id).toPromise().then(() => {
+          this.messageService.add({
+            severity: "success",
+            summary: "Успешно",
+            detail: "Трек номер успешно удален!"
+          });
+          this.ref.close()
+          this.getTracks()
+        }).catch((err) => {
+          this.messageService.add({
+            severity: "info",
+            summary: "Ошибка",
+            detail: err.error.message
+          });
+          console.log('err', err)
+        })
+      }
+    });
+  }
+
   getBackground (item: any) {
     if (item.track.receivedByClient) {
-      return '#c9d2f1'
+      return {'background': '#f280ff'}
     } else if (item.track.receivedInAlmatyDate) {
-      return '#34f55f'
+      return {'background': '#82ff9e'}
     } else if (item.track.fromChinaToAlmaty) {
-      return '#ffe94e'
+      return {'background': '#7ea8ff'}
     } else if (item.track.receivedInChinaDate) {
-      return '#e8aaaa'
+      return {'background': '#fffc80'}
     }
-    return '#dedede'
+    return {'background': '#c2c2c2'}
   }
 
   getTypeText(item: any) {
