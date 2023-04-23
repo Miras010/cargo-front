@@ -77,6 +77,10 @@ export class AuthService {
     return this.http.post(this.fullUrl + '/forgotPassword', data);
   }
 
+  forgotPasswordByPhone(data: any) {
+    return this.http.post(this.fullUrl + '/forgotPasswordByPhone', data);
+  }
+
   resetPassword(data: any) {
     return this.http.post(this.fullUrl + '/resetPassword', data);
   }

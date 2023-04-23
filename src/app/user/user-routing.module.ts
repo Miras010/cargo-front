@@ -30,12 +30,12 @@ const routes: Routes = [
     },
     {
       path: '',
-      redirectTo: 'home',
+      redirectTo: 'track',
       pathMatch: 'full'
     },
     {
       path: '**',
-      redirectTo: 'home',
+      redirectTo: 'track',
       pathMatch: 'full',
     },
   ],

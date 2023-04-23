@@ -16,7 +16,7 @@ import {CardComponent} from "../cardInfo/card.component";
   providers: [MessageService, DialogService]
 })
 export class TracksComponent implements OnInit {
-
+  totalTracks: number = 0
   data: Array<UsersTrack> = []
   isLoading: boolean = false
   // @ts-ignore
@@ -38,7 +38,10 @@ export class TracksComponent implements OnInit {
     this.trackService.getAllUsersTrack().subscribe(async (resp: any) => {
         this.data = resp.filter((item: any) => {
           return !!item.track;
+        }).sort((a: UsersTrack, b: UsersTrack) => {
+          return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
         })
+      this.totalTracks = this.data.length
       },
       (error: any) => {
       console.log('error', error)

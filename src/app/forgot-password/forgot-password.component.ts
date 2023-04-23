@@ -8,7 +8,8 @@ import {environment} from '../../environments/environment'
 @Component({
     selector: 'app-forgot-password',
     templateUrl: './forgot-password.component.html',
-    styleUrls: ['./forgot-password.component.scss']
+    styleUrls: ['./forgot-password.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ForgotPasswordComponent implements OnInit {
 
@@ -32,7 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
     })
 
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required)
+      phoneNumber: new FormControl('', Validators.required)
     });
   }
 
@@ -40,10 +41,14 @@ export class ForgotPasswordComponent implements OnInit {
     this.submitted = true
     if (this.loginForm.valid) {
       this.isLoading = true
+      const symbols = ['+', '(', ')', ' ', '-']
+      symbols.forEach(symbol => {
+        this.loginForm.value.phoneNumber = this.loginForm.value.phoneNumber.replaceAll(symbol, '')
+      })
       const data = {
-        username: this.loginForm.value.username,
+        phoneNumber: this.loginForm.value.phoneNumber,
       }
-      this.authService.forgotPassword(data)
+      this.authService.forgotPasswordByPhone(this.loginForm.value)
         .toPromise()
         .then(res => {
             this.messageService.add({
