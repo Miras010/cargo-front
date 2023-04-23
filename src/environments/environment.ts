@@ -31,7 +31,7 @@ export const environment = {
   // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  apiUrl: 'https://g-cargo:5000/api',
+  apiUrl: 'https://g-cargo.kz:5000/api',
   cargoType: 'GGG',
   logoUrl: 'ggg.jpeg',
 
