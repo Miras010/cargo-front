@@ -15,9 +15,9 @@ export const environment = {
   // logoUrl: 'MARRY.jpeg',
 
   // AINAR
-  // apiUrl: 'http://78.40.108.106:5000/api',
-  // cargoType: 'AINAR',
-  // logoUrl: 'AINAR.jpeg',
+  apiUrl: 'https://ainar-cargo.kz:5000/api',
+  cargoType: 'AINAR',
+  logoUrl: 'AINAR.jpeg',
 
   // DAR
   // apiUrl: 'http://78.40.108.102:5000/api',
@@ -41,9 +41,9 @@ export const environment = {
   // logoUrl: 'aks.jpg',
 
   // ASPAN
-  apiUrl: 'https://aspan-cargo.kz:5000/api',
-  cargoType: 'ASPAN',
-  logoUrl: 'aspan.jpg',
+  // apiUrl: 'https://aspan-cargo.kz:5000/api',
+  // cargoType: 'ASPAN',
+  // logoUrl: 'aspan.jpg',
 
   // LOCALHOST
   // apiUrl: 'http://localhost:5000/api',
