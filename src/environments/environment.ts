@@ -22,7 +22,7 @@ export const environment = {
   // DAR
   apiUrl: 'https://dar-logistics.kz:5000/api',
   cargoType: 'DAR',
-  logoUrl: 'DAR.jpeg',
+  logoUrl: 'dar.jpg',
 
 
   // ZIYA
