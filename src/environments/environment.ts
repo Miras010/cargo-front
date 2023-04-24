@@ -20,9 +20,9 @@ export const environment = {
   // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  // apiUrl: 'http://78.40.108.102:5000/api',
-  // cargoType: 'DAR',
-  // logoUrl: 'DAR.jpeg',
+  apiUrl: 'https://dar-logistics.kz:5000/api',
+  cargoType: 'DAR',
+  logoUrl: 'DAR.jpeg',
 
 
   // ZIYA
@@ -31,9 +31,9 @@ export const environment = {
   // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  apiUrl: 'https://g-cargo.kz:5000/api',
-  cargoType: 'GGG',
-  logoUrl: 'ggg.jpeg',
+  // apiUrl: 'https://g-cargo.kz:5000/api',
+  // cargoType: 'GGG',
+  // logoUrl: 'ggg.jpeg',
 
   // AKS
   // apiUrl: 'https://aks-cargo.kz:5000/api',
