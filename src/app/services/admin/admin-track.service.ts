@@ -43,6 +43,12 @@ export class AdminTrackService {
     })
   }
 
+  public uploadFile (data: any): Observable<any> {
+    return this.http.post(this.fullUrl + '/upsertMany', data, {
+      headers: this.headers
+    })
+  }
+
   public getOneTrack (trackId: string): Observable<any> {
     return this.http.get(this.fullUrl + '/getOne/' + trackId, {
       headers: this.headers

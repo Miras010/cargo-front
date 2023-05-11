@@ -45,14 +45,14 @@ export const environment = {
   // logoUrl: 'aspan.jpg',
 
   // ASPAN
-  apiUrl: 'https://alan-cargo.kz:5000/api',
-  cargoType: 'ALAN',
-  logoUrl: 'alan.jpg',
+  // apiUrl: 'https://alan-cargo.kz:5000/api',
+  // cargoType: 'ALAN',
+  // logoUrl: 'alan.jpg',
 
   // LOCALHOST
-  // apiUrl: 'http://localhost:5000/api',
-  // cargoType: 'logo',
-  // logoUrl: 'logo.png',
+  apiUrl: 'http://localhost:3000/api',
+  cargoType: 'logo',
+  logoUrl: 'logo.png',
 
   production: false,
   apiToken: 'apiToken',

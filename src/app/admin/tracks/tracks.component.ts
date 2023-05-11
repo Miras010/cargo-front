@@ -9,6 +9,8 @@ import * as XLSX from 'xlsx'
 import { startOfMonth, endOfMonth } from 'date-fns'
 // @ts-ignore
 import { getFormattedDate } from '../../functionServices/dataService';
+import {AdminFileService} from "../../services/admin/admin-file.service";
+import {FileModel} from "../../models/response/file-model";
 
 @Component({
   selector: 'app-tracks',
@@ -25,6 +27,7 @@ import { getFormattedDate } from '../../functionServices/dataService';
 })
 export class TracksComponent implements OnInit {
   totalRecords: number = 0;
+  totalFiles: number = 0;
   loading: boolean = false
   productDialog: any
   addManyDialog: any
@@ -41,7 +44,13 @@ export class TracksComponent implements OnInit {
     startOfMonth(new Date()),
     endOfMonth(new Date())
   ]
+  files: FileModel[] = []
   defaultParams = {
+    page: 1,
+    rows: 10,
+    globalFilter: null
+  }
+  defaultFilesParams = {
     page: 1,
     rows: 10,
     globalFilter: null
@@ -70,13 +79,45 @@ export class TracksComponent implements OnInit {
   selectedTracks: Track[] = []
 
   @ViewChild('dt') dt: Table | undefined
+  @ViewChild('FileTable') FileTable: Table | undefined
 
   constructor(private messageService: MessageService,
               private confirmationService: ConfirmationService,
+              private adminFileService: AdminFileService,
               private adminTrackService: AdminTrackService) { }
 
   ngOnInit() {
+    this.getAllFiles(this.defaultFilesParams)
     // this.getAllTracks(this.defaultParams)
+  }
+
+  getAllFiles (params: any) {
+    this.adminFileService.getAllFiles(params).toPromise()
+      .then((resp) => {
+        this.files = resp.resp
+        this.totalFiles = resp.totalCount
+      }).catch(err => {
+      console.log('err', err)
+    }).finally(() => {
+      this.loading = false
+    })
+  }
+
+  getAllTracks (params: any) {
+    this.loading = true
+    this.adminTrackService.getAllTracks(params).toPromise()
+      .then(resp => {
+        this.tracks = resp.resp
+        this.totalRecords = resp.totalCount
+      }).catch(err => {
+      console.log('err', err)
+    }).finally(() => {
+      this.loading = false
+    })
+  }
+
+  downloadFile (file: FileModel) {
+    this.adminFileService.downloadFile(file)
   }
 
   getFormattedDate (date: any) {
@@ -96,7 +137,7 @@ export class TracksComponent implements OnInit {
     this.getAllTracks(params)
   }
 
-  loadCustomers(event: LazyLoadEvent) {
+  loadTracks(event: LazyLoadEvent) {
     this.loading = false;
     console.log('event', event)
     let page = 1
@@ -109,21 +150,24 @@ export class TracksComponent implements OnInit {
     this.getAllTracks({rows, page, globalFilter})
   }
 
-  getAllTracks (params: any) {
-    this.loading = true
-    this.adminTrackService.getAllTracks(params).toPromise()
-      .then(resp => {
-        this.tracks = resp.resp
-        this.totalRecords = resp.totalCount
-      }).catch(err => {
-        console.log('err', err)
-     }).finally(() => {
-      this.loading = false
-    })
+  loadFiles(event: LazyLoadEvent) {
+    this.loading = false;
+    let page = 1
+    const { rows, first, globalFilter} = event
+    // @ts-ignore
+    if (first > 0) {
+      // @ts-ignore
+      page = (first / rows) + 1
+    }
+    this.getAllFiles({rows, page, globalFilter})
   }
 
   filterGlobal (dt: any, $event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
+
+  filterFiles (dt: any, $event: any, stringVal: any) {
+    this.FileTable!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   openNew() {
@@ -200,7 +244,7 @@ export class TracksComponent implements OnInit {
     this.addManyDialog = false
   }
 
-  onManySubmit () {
+  async onManySubmit () {
     if (this.addManyForm.valid) {
       this.loading = true
       if (this.arraylist.length > 0) {
@@ -226,9 +270,11 @@ export class TracksComponent implements OnInit {
         } else {
           promises.push(this.adminTrackService.upsertManyTracks(newArr).toPromise())
         }
-        Promise.all(promises)
+        let successUpload = false
+        await Promise.all(promises)
           .then((resp) => {
             this.addManyDialog = false
+            successUpload = true
             this.getAllTracks(this.defaultParams)
             this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
             console.log(resp)
@@ -238,6 +284,25 @@ export class TracksComponent implements OnInit {
           }).finally(() => {
             this.loading = true
           })
+        if (successUpload) {
+          console.log('upload')
+          const formData = new FormData()
+          // @ts-ignore
+          formData.append('file', this.file)
+          // @ts-ignore
+          formData.append('name', this.file.name)
+          formData.append('date', this.addManyForm.value.date)
+          formData.append('statusKey', this.addManyForm.value.status.key)
+          formData.append('statusValue', this.addManyForm.value.status.value)
+          this.adminFileService.uploadFile(formData).toPromise()
+            .then(() => {
+              console.log('success')
+            }).catch(err => {
+            console.log('err', err)
+          }).finally(() => {
+            this.getAllFiles(this.defaultFilesParams)
+          })
+        }
         // this.adminTrackService.upsertManyTracks(newArr)
         //   .toPromise()
         //   .then((resp) => {

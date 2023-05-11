@@ -11,3 +11,23 @@
   justify-content: center;
   align-items: center;
 }
+
+.file-table {
+  margin-bottom: 50px;
+}
+
+.file-table table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.file-table td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+//
+//.file-table tr:nth-child(even) {
+//  background-color: #dddddd;
+//}

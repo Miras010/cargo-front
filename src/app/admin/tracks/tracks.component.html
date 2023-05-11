@@ -1,47 +1,82 @@
 <div class="trackCard">
   <div class="container">
-    <!--    <div class="mb-4">-->
-    <!--      <p-card>-->
-    <!--        <div class="p-card-title">-->
-    <!--          Фильтр-->
-    <!--        </div>-->
-    <!--        <div>-->
-    <!--          <label>Фильтровать по</label>-->
-    <!--          <p-dropdown [(ngModel)]="filterBy" optionLabel="value" [options]="statuses" placeholder="Select">-->
-    <!--          </p-dropdown>-->
-    <!--        </div>-->
-    <!--        <div class="field mt-3 mb-3">-->
-    <!--          <p-calendar style="width: 300px;" [(ngModel)]="rangeDates" dateFormat="dd-mm-yy" selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>-->
-    <!--        </div>-->
-    <!--        <div>-->
-    <!--          <button (click)="enterFilter()" pRipple pButton>Применить</button>-->
-    <!--        </div>-->
-    <!--      </p-card>-->
-    <!--    </div>-->
-
-
     <div>
       <p-toast position="top-center"></p-toast>
       <div>
         <p-toolbar styleClass="mb-4 gap-2">
           <ng-template pTemplate="left">
-            <div class="row">
-              <div class="col-lg-4 col-sm-12">
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <div>
                 <button pButton pRipple label="Добавить" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
               </div>
-              <div class="col-lg-4 col-sm-12">
+              <div class="mx-2">
                 <button pButton pRipple label="Загрузить" icon="pi pi-file" class="p-button" (click)="openMany()"></button>
               </div>
-              <div class="col-lg-4 col-sm-12">
-                <button pButton pRipple label="Удалить"  icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedTracks || !selectedTracks.length"></button>
-              </div>
+<!--              <div class="col-lg-4 col-sm-12">-->
+<!--                <button pButton pRipple label="Удалить"  icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedTracks || !selectedTracks.length"></button>-->
+<!--              </div>-->
             </div>
           </ng-template>
         </p-toolbar>
+        <div class="mb-4">
+          <p-table #FileTable
+                   [value]="files"
+                   [lazy]="true"
+                   (onLazyLoad)="loadFiles($event)"
+                   [rows]="10" [paginator]="true"
+                   [globalFilterFields]="['name']"
+                   [tableStyle]="{'min-width': '75rem'}"
+                   [rowHover]="true"
+                   [totalRecords]="totalFiles"
+                   [loading]="loading"
+                   [rowsPerPageOptions]="[1,2,5]"
+                   dataKey="_id"
+                   currentPageReportTemplate="Показано от {first} до {last} из {totalRecords} всех записей" [showCurrentPageReport]="true" >
+            <ng-template pTemplate="caption">
+              <div class="flex align-items-center justify-content-between">
+                <div class="mb-4" style="font-size: 20px;">
+                  Загруженные файлы
+                </div>
+                <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" (input)="filterFiles(dt, $event, 'contains')" placeholder="Искать по название файла" />
+                  </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Название файла</th>
+                <th>Дата загрузки</th>
+                <th>Статус</th>
+                <th>Дата</th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-file>
+              <tr>
+                <td>{{file.name}}</td>
+                <td>
+                  {{ getFormattedDate(file.createdDate) }}
+                </td>
+                <td>
+                  {{ file.statusValue }}
+                </td>
+                <td>
+                  {{ getFormattedDate(file.date) }}
+                </td>
+                <td>
+                  <div class="d-flex">
+                    <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-success mx-1" (click)="downloadFile(file)"></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
         <p-table #dt
                  [value]="tracks"
                  [lazy]="true"
-                 (onLazyLoad)="loadCustomers($event)"
+                 (onLazyLoad)="loadTracks($event)"
                  [rows]="10" [paginator]="true"
                  [globalFilterFields]="['trackNumber']"
                  [tableStyle]="{'min-width': '75rem'}"
@@ -54,11 +89,13 @@
                  currentPageReportTemplate="Показано от {first} до {last} из {totalRecords} всех записей" [showCurrentPageReport]="true" >
           <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
+              <div class="mb-4" style="font-size: 20px;">
+                Трек коды
+              </div>
               <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" (input)="filterGlobal(dt, $event, 'contains')" placeholder="Искать по трек номеру..." />
                 </span>
-
             </div>
           </ng-template>
           <ng-template pTemplate="header">
@@ -66,7 +103,7 @@
               <th style="width: 4rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="trackNumber" style="min-width:15rem">Трек номер</th>
+              <th style="min-width:15rem">Трек номер</th>
               <th pSortableColumn="createdDate">Дата создания</th>
               <th pSortableColumn="receivedInChinaDate">ДП на складе в Китае</th>
               <th pSortableColumn="fromChinaToAlmaty">Отправлено с Китая в Алматы</th>
@@ -74,29 +111,6 @@
               <th pSortableColumn="receivedByClient">Получено клиентом</th>
               <th></th>
             </tr>
-            <!--            <tr>-->
-            <!--              <th style="width: 4rem">-->
-            <!--                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>-->
-            <!--              </th>-->
-            <!--              <th>-->
-            <!--                <p-columnFilter type="text" field="trackNumber"></p-columnFilter>-->
-            <!--              </th>-->
-            <!--              <th>-->
-            <!--                <p-columnFilter type="text" field="createdDate"></p-columnFilter>-->
-            <!--              </th>-->
-            <!--              <th>-->
-            <!--                <p-columnFilter type="text" field="receivedInChinaDate"></p-columnFilter>-->
-            <!--              </th>-->
-            <!--              <th>-->
-            <!--                <p-columnFilter type="text" field="fromChinaToAlmaty"></p-columnFilter>-->
-            <!--              </th>-->
-            <!--              <th>-->
-            <!--                <p-columnFilter type="text" field="receivedInAlmatyDate"></p-columnFilter>-->
-            <!--              </th>-->
-            <!--              <th>-->
-            <!--                <p-columnFilter type="text" field="receivedByClient"></p-columnFilter>-->
-            <!--              </th>-->
-            <!--            </tr>-->
           </ng-template>
           <ng-template pTemplate="body" let-track>
             <tr>
