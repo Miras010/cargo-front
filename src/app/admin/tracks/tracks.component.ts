@@ -60,16 +60,9 @@ export class TracksComponent implements OnInit {
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
     { value: 'Дата отправления в Алматы', key: 'fromChinaToAlmaty' },
     { value: 'Дата получения на складе в Алматы', key: 'receivedInAlmatyDate' },
+    { value: 'Дата отправления из Алматы в другой город', key: 'shippedFromAlmatyDate' },
     { value: 'Дата получения клиентом', key: 'receivedByClient' },
   ]
-
-  trackForm: FormGroup = new FormGroup({
-    trackNumber: new FormControl('', Validators.required),
-    fromChinaToAlmaty: new FormControl(''),
-    receivedInAlmatyDate: new FormControl(''),
-    receivedInChinaDate: new FormControl(''),
-    receivedByClient: new FormControl(''),
-  })
 
   addManyForm: FormGroup = new FormGroup({
     status: new FormControl('', Validators.required),
@@ -103,51 +96,12 @@ export class TracksComponent implements OnInit {
     })
   }
 
-  getAllTracks (params: any) {
-    this.loading = true
-    this.adminTrackService.getAllTracks(params).toPromise()
-      .then(resp => {
-        this.tracks = resp.resp
-        this.totalRecords = resp.totalCount
-      }).catch(err => {
-      console.log('err', err)
-    }).finally(() => {
-      this.loading = false
-    })
-  }
-
   downloadFile (file: FileModel) {
     this.adminFileService.downloadFile(file)
   }
 
   getFormattedDate (date: any) {
     return getFormattedDate(date).split(' ')[0]
-  }
-
-  enterFilter() {
-    console.log('this.filterBy',this.filterBy)
-    const params = {
-      page: 1,
-      rows: 10,
-      globalFilter: null,
-      filterBy: this.filterBy.key,
-      from: this.rangeDates[0].getTime(),
-      to: this.rangeDates[1].getTime(),
-    }
-    this.getAllTracks(params)
-  }
-
-  loadTracks(event: LazyLoadEvent) {
-    this.loading = false;
-    console.log('event', event)
-    let page = 1
-    const { rows, first, globalFilter} = event
-    // @ts-ignore
-    if (first > 0) {
-      // @ts-ignore
-      page = (first / rows) + 1
-    }
-    this.getAllTracks({rows, page, globalFilter})
   }
 
   loadFiles(event: LazyLoadEvent) {
@@ -179,63 +133,6 @@ export class TracksComponent implements OnInit {
     this.addManyDialog = true;
   }
 
-  deleteSelectedProducts() {
-    this.confirmationService.confirm({
-      message: 'Вы уверены что хотите удалить выбранные треки?',
-      header: 'Подтверждение',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        let promises: Promise<any>[] = []
-        this.selectedTracks.forEach((item) => {
-          promises.push(this.adminTrackService.deleteTrack(item._id).toPromise())
-        })
-        Promise.all(promises)
-          .then(() => {
-            this.getAllTracks(this.defaultParams)
-          this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Треки удалены', life: 3000});
-        })
-          .catch(err => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось удалить трек номер' + err.error.message, life: 3000});
-          })
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
-        this.getAllTracks(this.defaultParams)
-      }
-    });
-  }
-
-  editProduct(track: Track) {
-    console.log(track)
-    this.editingType = 'edit'
-    this.trackForm =  new FormGroup({
-      _id: new FormControl(track._id),
-      trackNumber: new FormControl(track.trackNumber, Validators.required),
-      receivedInChinaDate: new FormControl(track.receivedInChinaDate ? new Date(track.receivedInChinaDate) : ''),
-      receivedInAlmatyDate: new FormControl(track.receivedInAlmatyDate ? new Date(track.receivedInAlmatyDate) : ''),
-      fromChinaToAlmaty: new FormControl(track.fromChinaToAlmaty ? new Date(track.fromChinaToAlmaty) : ''),
-      receivedByClient: new FormControl(track.receivedByClient ? new Date(track.receivedByClient) : ''),
-    })
-    console.log(this.trackForm)
-    this.productDialog = true;
-  }
-
-  deleteProduct(track: Track) {
-    this.confirmationService.confirm({
-      message: 'Вы уверены что хотите удалить ' + track.trackNumber + '?',
-      header: 'Подтверждение',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.adminTrackService.deleteTrack(track._id).toPromise()
-          .then(() => {
-            this.getAllTracks(this.defaultParams)
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек успешно удален', life: 3000});
-          })
-          .catch(err => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось удалить трек номер' + err.error.message, life: 3000});
-          })
-      }
-    });
-  }
-
   hideDialog() {
     this.productDialog = false;
   }
@@ -252,10 +149,13 @@ export class TracksComponent implements OnInit {
         const userId = JSON.parse(localStorage.getItem('userInfo'))._id
         const newArr = this.arraylist.map(item => {
           let newItem = {
-            trackNumber: ''
+            trackNumber: '',
+            fileName: ''
           }
           // @ts-ignore
           newItem[this.addManyForm.value.status.key] = this.addManyForm.value.date
+          // @ts-ignore
+          newItem.fileName = this.file?.name
           newItem.trackNumber = item['条码']
           return newItem
         })
@@ -275,7 +175,6 @@ export class TracksComponent implements OnInit {
           .then((resp) => {
             this.addManyDialog = false
             successUpload = true
-            this.getAllTracks(this.defaultParams)
             this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номера успешно созданы (обновлены)', life: 3000});
             console.log(resp)
           })
@@ -318,39 +217,6 @@ export class TracksComponent implements OnInit {
         this.messageService.add({severity:'info', summary: 'Error', detail: 'Не удалось получить данные с файла', life: 3000})
       }
     }
-  }
-
-  onSubmit() {
-    console.log('onsubm2it')
-
-    if (this.trackForm.valid) {
-      console.log('onsubmit')
-      if (this.editingType === 'new') {
-        this.adminTrackService.createTrack(this.trackForm.value).toPromise()
-          .then(() => {
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно создан', life: 3000});
-            this.productDialog = false
-            this.getAllTracks(this.defaultParams)
-          })
-          .catch((err) => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось создать трек номер' + err.error.message, life: 3000});
-            console.log(err)
-          })
-      } else if (this.editingType === 'edit') {
-        this.adminTrackService.updateTrack(this.trackForm.value).toPromise()
-          .then(() => {
-            this.messageService.add({severity:'success', summary: 'Успешно', detail: 'Трек номер успешно обновлен', life: 3000});
-            this.productDialog = false
-            this.getAllTracks(this.defaultParams)
-          })
-          .catch((err) => {
-            this.messageService.add({severity:'error', summary: 'Ошибка', detail: 'Не удалось обновить трек номер' + err, life: 3000});
-            console.log(err)
-          })
-      }
-
-    }
-    console.log('t', this.trackForm.value)
   }
 
   findIndexById(id: string): number {

@@ -6,6 +6,7 @@ import {TracksComponent} from "./tracks/tracks.component";
 import {UsersComponent} from "./users/users.component";
 import {ReceiptsComponent} from "./receipts/receipts.component";
 import {ScanComponent} from "./scan/scan.component";
+import {TrackListComponent} from "./trackList/track-list.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
       path: 'tracks',
       component: TracksComponent
+    },
+    {
+      path: 'track-list',
+      component: TrackListComponent
     },
     {
       path: 'receipts',

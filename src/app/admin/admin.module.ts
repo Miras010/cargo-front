@@ -33,6 +33,7 @@ import {ReceiptsComponent} from "./receipts/receipts.component";
 import {SkeletonModule} from "primeng/skeleton";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {ScanComponent} from "./scan/scan.component";
+import {TrackListComponent} from "./trackList/track-list.component";
 
 @NgModule({
   imports: [
@@ -71,6 +72,7 @@ import {ScanComponent} from "./scan/scan.component";
   declarations: [
     AdminComponent,
     TracksComponent,
+    TrackListComponent,
     ReceiptsComponent,
     AdminHeaderComponent,
     UsersComponent,
