@@ -12,6 +12,7 @@ export interface Track {
   createdDate: Date,
   fromChinaToAlmaty: Date,
   receivedInAlmatyDate: Date,
+  shippedFromAlmatyDate: Date,
   receivedInChinaDate: Date,
   receivedByClient: Date
 }

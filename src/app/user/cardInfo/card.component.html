@@ -41,6 +41,15 @@
       <span class="cardInfoText">{{ item.track.receivedInAlmatyDate ? getFormattedDate(item.track.receivedInAlmatyDate) : 'Нет данных'  }}</span>
     </div>
   </div>
+  <div *ngIf="item.track.shippedFromAlmatyDate" class="cardSec mt-3">
+    <div class="iconSec">
+      <i class="pi pi-check-circle" style="font-size: 2rem"></i>
+    </div>
+    <div class="">
+      <span class="cardSubTitle">Отправлено из Алматы в другой город:</span><br>
+      <span class="cardInfoText">{{ item.track.shippedFromAlmatyDate ? getFormattedDate(item.track.shippedFromAlmatyDate) : 'Нет данных'  }}</span>
+    </div>
+  </div>
   <div *ngIf="item.track.receivedByClient" class="cardSec mt-3">
     <div class="iconSec">
       <i class="pi pi-check-circle" style="font-size: 2rem"></i>
