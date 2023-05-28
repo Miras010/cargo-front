@@ -49,10 +49,15 @@ export const environment = {
   // cargoType: 'ALAN',
   // logoUrl: 'alan.jpg',
 
+  // DILYA
+  apiUrl: 'https://dilya-cargo.kz:5000/api',
+  cargoType: 'DILYA',
+  logoUrl: 'dilya.jpeg',
+
   // LOCALHOST
-  apiUrl: 'http://localhost:3000/api',
-  cargoType: 'logo',
-  logoUrl: 'logo.png',
+  // apiUrl: 'http://localhost:3000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'logo.png',
 
   production: false,
   apiToken: 'apiToken',
