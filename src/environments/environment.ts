@@ -1,13 +1,13 @@
 export const environment = {
-  // ELMIRA
-  // apiUrl: 'http://194.110.55.17:5000/api',
-  // cargoType: 'logo',
-  // logoUrl: 'ZHAPPAR.png',
+  // Zhappar
+  apiUrl: 'https://zhappar-cargo.kz:5000/api',
+  cargoType: 'logo',
+  logoUrl: 'ZHAPPAR.png',
 
   // ZHAN
-  apiUrl: 'https://zhan-cargo.kz:5000/api',
-  cargoType: 'ZHAN',
-  logoUrl: 'ZHAN.jpeg',
+  // apiUrl: 'https://zhan-cargo.kz:5000/api',
+  // cargoType: 'ZHAN',
+  // logoUrl: 'ZHAN.jpeg',
 
   // MARRY
   // apiUrl: 'http://185.22.64.100:5000/api',
