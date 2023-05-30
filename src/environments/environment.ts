@@ -25,14 +25,14 @@ export const environment = {
   // logoUrl: 'dar.jpg',
 
   // ZIYA
-  apiUrl: 'https://ziya-cargo.kz:5000/api',
-  cargoType: 'ZIYA',
-  logoUrl: 'ZIYA.jpeg',
+  // apiUrl: 'https://ziya-cargo.kz:5000/api',
+  // cargoType: 'ZIYA',
+  // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  // apiUrl: 'https://g-cargo.kz:5000/api',
-  // cargoType: 'GGG',
-  // logoUrl: 'ggg.jpeg',
+  apiUrl: 'https://g-cargo.kz:5000/api',
+  cargoType: 'GGG',
+  logoUrl: 'ggg.jpeg',
 
   // AKS
   // apiUrl: 'https://aks-cargo.kz:5000/api',
