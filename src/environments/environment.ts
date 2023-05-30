@@ -1,8 +1,8 @@
 export const environment = {
   // Zhappar
-  apiUrl: 'https://zhappar-cargo.kz:5000/api',
-  cargoType: 'logo',
-  logoUrl: 'ZHAPPAR.png',
+  // apiUrl: 'https://zhappar-cargo.kz:5000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'ZHAPPAR.png',
 
   // ZHAN
   // apiUrl: 'https://zhan-cargo.kz:5000/api',
@@ -20,9 +20,9 @@ export const environment = {
   // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  // apiUrl: 'https://dar-logistics.kz:5000/api',
-  // cargoType: 'DAR',
-  // logoUrl: 'dar.jpg',
+  apiUrl: 'https://dar-logistics.kz:5000/api',
+  cargoType: 'DAR',
+  logoUrl: 'dar.jpg',
 
   // ZIYA
   // apiUrl: 'https://ziya-cargo.kz:5000/api',
