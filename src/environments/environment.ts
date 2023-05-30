@@ -15,9 +15,9 @@ export const environment = {
   // logoUrl: 'MARRY.jpeg',
 
   // AINAR
-  // apiUrl: 'https://ainar-cargo.kz:5000/api',
-  // cargoType: 'AINAR',
-  // logoUrl: 'AINAR.jpeg',
+  apiUrl: 'https://ainar-cargo.kz:5000/api',
+  cargoType: 'AINAR',
+  logoUrl: 'AINAR.jpeg',
 
   // DAR
   // apiUrl: 'https://dar-logistics.kz:5000/api',
@@ -30,9 +30,9 @@ export const environment = {
   // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  apiUrl: 'https://g-cargo.kz:5000/api',
-  cargoType: 'GGG',
-  logoUrl: 'ggg.jpeg',
+  // apiUrl: 'https://g-cargo.kz:5000/api',
+  // cargoType: 'GGG',
+  // logoUrl: 'ggg.jpeg',
 
   // AKS
   // apiUrl: 'https://aks-cargo.kz:5000/api',
