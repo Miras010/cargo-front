@@ -25,9 +25,9 @@ export const environment = {
   // logoUrl: 'dar.jpg',
 
   // ZIYA
-  // apiUrl: 'http://195.49.215.227:5000/api',
-  // cargoType: 'ZIYA',
-  // logoUrl: 'ZIYA.jpeg',
+  apiUrl: 'https://ziya-cargo.kz:5000/api',
+  cargoType: 'ZIYA',
+  logoUrl: 'ZIYA.jpeg',
 
   // GGG
   // apiUrl: 'https://g-cargo.kz:5000/api',
@@ -50,9 +50,9 @@ export const environment = {
   // logoUrl: 'alan.jpg',
 
   // DILYA
-  apiUrl: 'https://dilya-cargo.kz:5000/api',
-  cargoType: 'DILYA',
-  logoUrl: 'dilya.jpeg',
+  // apiUrl: 'https://dilya-cargo.kz:5000/api',
+  // cargoType: 'DILYA',
+  // logoUrl: 'dilya.jpeg',
 
   // LOCALHOST
   // apiUrl: 'http://localhost:3000/api',
