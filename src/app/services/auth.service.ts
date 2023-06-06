@@ -12,7 +12,7 @@ export class AuthService {
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + localStorage.getItem(environment.apiToken),
+    'Authorization': 'Bearer ' + sessionStorage.getItem(environment.apiToken),
   });
 
   public authorized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -29,25 +29,25 @@ export class AuthService {
     localStorage.setItem('lastPhoneNumber', inputData.phoneNumber);
     localStorage.setItem('lastPassword', inputData.password);
 
-    localStorage.setItem(environment.apiToken, perf.token);
-    localStorage.setItem('userInfo', JSON.stringify(perf.userInfo));
+    sessionStorage.setItem(environment.apiToken, perf.token);
+    sessionStorage.setItem('userInfo', JSON.stringify(perf.userInfo));
     perf.roles.forEach((role: string) => {
       if (role === 'ADMIN') {
-        localStorage.setItem(environment.roleName, role);
-        localStorage.setItem(environment.rolePath, 'admin');
+        sessionStorage.setItem(environment.roleName, role);
+        sessionStorage.setItem(environment.rolePath, 'admin');
       } else if (role === 'USER') {
-        localStorage.setItem(environment.roleName, role);
-        localStorage.setItem(environment.rolePath, 'user');
+        sessionStorage.setItem(environment.roleName, role);
+        sessionStorage.setItem(environment.rolePath, 'user');
       } else if (role === 'PARTNER') {
-        localStorage.setItem(environment.roleName, role);
-        localStorage.setItem(environment.rolePath, 'partner');
+        sessionStorage.setItem(environment.roleName, role);
+        sessionStorage.setItem(environment.rolePath, 'partner');
       }
     })
-    if (localStorage.getItem(environment.rolePath) === 'partner') {
+    if (sessionStorage.getItem(environment.rolePath) === 'partner') {
       this.router.navigate(['partner']);
-    } else if (localStorage.getItem(environment.rolePath) === 'user') {
+    } else if (sessionStorage.getItem(environment.rolePath) === 'user') {
       this.router.navigate(['user'])
-    } else if (localStorage.getItem(environment.rolePath) === 'admin') {
+    } else if (sessionStorage.getItem(environment.rolePath) === 'admin') {
       this.router.navigate(['admin'])
     }
   }
@@ -90,19 +90,19 @@ export class AuthService {
   }
 
   isAuthorized() {
-    return localStorage.getItem(environment.apiToken);
+    return sessionStorage.getItem(environment.apiToken);
   }
 
   checkAvailability(): boolean {
-    return !!localStorage.getItem(environment.apiToken);
+    return !!sessionStorage.getItem(environment.apiToken);
   }
 
   removeToken() {
-    localStorage.removeItem(environment.apiToken);
+    sessionStorage.removeItem(environment.apiToken);
   }
 
   removeRole() {
-    localStorage.removeItem(environment.roleName);
+    sessionStorage.removeItem(environment.roleName);
   }
 
   removeAll() {
@@ -111,15 +111,15 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem(environment.apiToken);
+    return sessionStorage.getItem(environment.apiToken);
   }
 
   getRole() {
-    return localStorage.getItem(environment.roleName);
+    return sessionStorage.getItem(environment.roleName);
   }
 
   getRolePath() {
-    return localStorage.getItem(environment.rolePath);
+    return sessionStorage.getItem(environment.rolePath);
   }
 
   public logout() {
@@ -164,7 +164,7 @@ export class AuthService {
   // }
 
   getMyApi() {
-    return localStorage.getItem(environment.apiToken);
+    return sessionStorage.getItem(environment.apiToken);
   }
 
 }

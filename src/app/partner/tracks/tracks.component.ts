@@ -204,7 +204,7 @@ export class TracksComponent implements OnInit {
     if (this.addManyForm.valid) {
       if (this.arraylist.length > 0) {
         // @ts-ignore
-        const userId = JSON.parse(localStorage.getItem('userInfo'))._id
+        const userId = JSON.parse(sessionStorage.getItem('userInfo'))._id
         const newArr = this.arraylist.map(item => {
           let newItem = {
             trackNumber: ''

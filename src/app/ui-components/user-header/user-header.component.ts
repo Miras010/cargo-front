@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment'
 export class UserHeaderComponent implements OnInit {
   logoPath = `assets/${environment.logoUrl}`
   // @ts-ignore
-  userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
 
   ngOnInit() {
     console.log('userInfo', this.userInfo.username)

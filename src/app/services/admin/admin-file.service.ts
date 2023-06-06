@@ -13,7 +13,7 @@ export class AdminFileService {
   headers = new HttpHeaders({
     'Content-Type': 'multipart/form-data',
     'enctype': 'multipart/form-data',
-    'Authorization': 'Bearer ' + localStorage.getItem(environment.apiToken),
+    'Authorization': 'Bearer ' + sessionStorage.getItem(environment.apiToken),
   })
 
   constructor(private http: HttpClient) {

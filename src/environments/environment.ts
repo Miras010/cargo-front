@@ -55,9 +55,14 @@ export const environment = {
   // logoUrl: 'dilya.jpeg',
 
   // AKTY
-  apiUrl: 'https://akty-cargo.kz:5000/api',
-  cargoType: 'akty',
-  logoUrl: 'akty.jpeg',
+  // apiUrl: 'https://akty-cargo.kz:5000/api',
+  // cargoType: 'akty',
+  // logoUrl: 'akty.jpeg',
+
+  // TAU
+  apiUrl: 'https://tau-cargo.kz:5000/api',
+  cargoType: 'tau',
+  logoUrl: 'tau.jpeg',
 
   // LOCALHOST
   // apiUrl: 'http://localhost:3000/api',

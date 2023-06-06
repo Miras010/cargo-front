@@ -18,7 +18,7 @@ import {CardComponent} from "../cardInfo/card.component";
 export class HomeComponent implements OnInit {
 
   // @ts-ignore
-  userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
 
   constructor(private messageService: MessageService,
               private trackService: TrackService,

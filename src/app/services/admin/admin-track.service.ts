@@ -11,7 +11,7 @@ export class AdminTrackService {
   fullUrl = environment.apiUrl + '/track'
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + localStorage.getItem(environment.apiToken),
+    'Authorization': 'Bearer ' + sessionStorage.getItem(environment.apiToken),
   })
 
   constructor(private http: HttpClient) {

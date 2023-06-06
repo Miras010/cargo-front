@@ -20,7 +20,7 @@ export class TracksComponent implements OnInit {
   data: Array<UsersTrack> = []
   isLoading: boolean = false
   // @ts-ignore
-  userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
   // @ts-ignore
   ref: DynamicDialogRef;
 
