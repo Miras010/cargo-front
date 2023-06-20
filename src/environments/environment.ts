@@ -60,9 +60,15 @@ export const environment = {
   // logoUrl: 'akty.jpeg',
 
   // TAU
-  apiUrl: 'https://tau-cargo.kz:5000/api',
-  cargoType: 'tau',
-  logoUrl: 'tau.jpeg',
+  // apiUrl: 'https://tau-cargo.kz:5000/api',
+  // cargoType: 'tau',
+  // logoUrl: 'tau.jpeg',
+
+  // ARU
+  apiUrl: 'https://aru-cargo.kz:5000/api',
+  cargoType: 'aru',
+  logoUrl: 'aru.jpeg',
+
 
   // LOCALHOST
   // apiUrl: 'http://localhost:3000/api',
