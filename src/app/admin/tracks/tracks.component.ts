@@ -148,6 +148,12 @@ export class TracksComponent implements OnInit {
         // @ts-ignore
         const userId = JSON.parse(sessionStorage.getItem('userInfo'))._id
         const newArr = this.arraylist.map(item => {
+          let itemValue = ''
+          if (item['条码']) {
+            itemValue = item['条码']
+          } else if (item['内容']) {
+            itemValue = item['内容']
+          }
           let newItem = {
             trackNumber: '',
             fileName: ''
@@ -156,7 +162,7 @@ export class TracksComponent implements OnInit {
           newItem[this.addManyForm.value.status.key] = this.addManyForm.value.date
           // @ts-ignore
           newItem.fileName = this.file?.name
-          newItem.trackNumber = item['条码']
+          newItem.trackNumber = itemValue
           return newItem
         })
         console.log('newarr', newArr)
