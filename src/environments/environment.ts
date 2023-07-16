@@ -1,8 +1,8 @@
 export const environment = {
   // Zhappar
-  apiUrl: 'https://zhappar-cargo.kz:5000/api',
-  cargoType: 'logo',
-  logoUrl: 'ZHAPPAR.png',
+  // apiUrl: 'https://zhappar-cargo.kz:5000/api',
+  // cargoType: 'logo',
+  // logoUrl: 'ZHAPPAR.png',
 
   // ZHAN
   // apiUrl: 'https://zhan-cargo.kz:5000/api',
@@ -65,9 +65,9 @@ export const environment = {
   // logoUrl: 'tau.jpeg',
 
   // ARU
-  // apiUrl: 'https://aru-cargo.kz:5000/api',
-  // cargoType: 'aru',
-  // logoUrl: 'aru.jpeg',
+  apiUrl: 'https://aru-cargo.kz:5000/api',
+  cargoType: 'aru',
+  logoUrl: 'aru.jpeg',
 
 
   // LOCALHOST
