@@ -1,8 +1,10 @@
+import {User} from "../user";
+
 export interface UsersTrack {
   _id: string,
   createdDate: Date,
   description: string,
-  ownerId: string,
+  ownerId: User,
   track: Track,
 }
 export interface Track {

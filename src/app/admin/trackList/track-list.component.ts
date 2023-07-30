@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core'
 import {ConfirmationService, LazyLoadEvent} from 'primeng/api'
 import { MessageService } from 'primeng/api'
-import { Track } from '../../models/response/track-models'
+import {Track, UsersTrack} from '../../models/response/track-models'
 import {AdminTrackService} from "../../services/admin/admin-track.service"
 import {Table} from "primeng/table"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
@@ -30,6 +30,8 @@ export class TrackListComponent implements OnInit {
   totalFiles: number = 0;
   loading: boolean = false
   productDialog: any
+  ownerDialog: any
+  ownerInfo: Array<UsersTrack> | undefined
   addManyDialog: any
   editingType: string = ''
   tracks: Track[] = []
@@ -204,6 +206,17 @@ export class TrackListComponent implements OnInit {
     })
     console.log(this.trackForm)
     this.productDialog = true;
+  }
+
+  getInfo(track: Track) {
+    console.log(track)
+    this.adminTrackService.getTrackinfo(track.trackNumber).toPromise().then(resp => {
+      console.log(resp)
+      this.ownerInfo = resp
+    }).catch(err => {
+      console.log(err)
+    })
+    this.ownerDialog = true
   }
 
   deleteProduct(track: Track) {

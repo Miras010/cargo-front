@@ -37,6 +37,12 @@ export class AdminTrackService {
     })
   }
 
+  public getTrackinfo (trackNumber: any): Observable<any> {
+    return this.http.get(this.fullUrl + '/getOwner/' + trackNumber, {
+      headers: this.headers
+    })
+  }
+
   public upsertManyTracks (data: any): Observable<any> {
     return this.http.post(this.fullUrl + '/upsertMany', data, {
       headers: this.headers
