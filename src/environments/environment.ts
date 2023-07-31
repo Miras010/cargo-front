@@ -15,14 +15,14 @@ export const environment = {
   // logoUrl: 'MARRY.jpeg',
 
   // AINAR
-  apiUrl: 'https://ainar-cargo.kz:5000/api',
-  cargoType: 'AINAR',
-  logoUrl: 'AINAR.jpeg',
+  // apiUrl: 'https://ainar-cargo.kz:5000/api',
+  // cargoType: 'AINAR',
+  // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  // apiUrl: 'https://dar-logistics.kz:5000/api',
-  // cargoType: 'DAR',
-  // logoUrl: 'dar.jpg',
+  apiUrl: 'https://dar-logistics.kz:5000/api',
+  cargoType: 'DAR',
+  logoUrl: 'dar.jpg',
 
   // ZIYA
   // apiUrl: 'https://ziya-cargo.kz:5000/api',
