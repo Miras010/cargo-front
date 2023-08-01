@@ -20,9 +20,9 @@ export const environment = {
   // logoUrl: 'AINAR.jpeg',
 
   // DAR
-  apiUrl: 'https://dar-logistics.kz:5000/api',
-  cargoType: 'DAR',
-  logoUrl: 'dar.jpg',
+  // apiUrl: 'https://dar-logistics.kz:5000/api',
+  // cargoType: 'DAR',
+  // logoUrl: 'dar.jpg',
 
   // ZIYA
   // apiUrl: 'https://ziya-cargo.kz:5000/api',
@@ -40,11 +40,11 @@ export const environment = {
   // logoUrl: 'aks.jpg',
 
   // ASPAN
-  // apiUrl: 'https://aspan-cargo.kz:5000/api',
-  // cargoType: 'ASPAN',
-  // logoUrl: 'aspan.jpg',
+  apiUrl: 'https://aspan-cargo.kz:5000/api',
+  cargoType: 'ASPAN',
+  logoUrl: 'aspan.jpg',
 
-  // ASPAN
+  // ALAN
   // apiUrl: 'https://alan-cargo.kz:5000/api',
   // cargoType: 'ALAN',
   // logoUrl: 'alan.jpg',
