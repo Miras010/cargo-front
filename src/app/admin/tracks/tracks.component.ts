@@ -66,7 +66,7 @@ export class TracksComponent implements OnInit {
 
   addManyForm: FormGroup = new FormGroup({
     status: new FormControl('', Validators.required),
-    date: new FormControl('', Validators.required),
+    date: new FormControl(''),
   })
 
   selectedTracks: Track[] = []
@@ -165,7 +165,6 @@ export class TracksComponent implements OnInit {
           newItem.trackNumber = itemValue
           return newItem
         })
-        console.log('newarr', newArr)
         let promises = []
         if (newArr.length > 300) {
           let index = Math.ceil(newArr.length / 300)
