@@ -45,9 +45,9 @@ export const environment = {
   // logoUrl: 'aspan.jpg',
 
   // ALAN
-  apiUrl: 'https://alan-cargo.kz:5000/api',
-  cargoType: 'ALAN',
-  logoUrl: 'alan.jpg',
+  // apiUrl: 'https://alan-cargo.kz:5000/api',
+  // cargoType: 'ALAN',
+  // logoUrl: 'alan.jpg',
 
   // DILYA
   // apiUrl: 'https://dilya-cargo.kz:5000/api',
@@ -65,9 +65,9 @@ export const environment = {
   // logoUrl: 'tau.jpeg',
 
   // ARU
-  // apiUrl: 'https://aru-cargo.kz:5000/api',
-  // cargoType: 'aru',
-  // logoUrl: 'aru.jpeg',
+  apiUrl: 'https://aru-cargo.kz:5000/api',
+  cargoType: 'aru',
+  logoUrl: 'aru.jpeg',
 
 
   // LOCALHOST
