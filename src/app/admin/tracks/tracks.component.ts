@@ -153,6 +153,8 @@ export class TracksComponent implements OnInit {
             itemValue = item['条码']
           } else if (item['内容']) {
             itemValue = item['内容']
+          } else if (item['单号']) {
+            itemValue = item['单号']
           }
           let newItem = {
             trackNumber: '',
