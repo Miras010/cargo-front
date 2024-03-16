@@ -67,6 +67,7 @@ export class TracksComponent implements OnInit {
   addManyForm: FormGroup = new FormGroup({
     status: new FormControl('', Validators.required),
     date: new FormControl(''),
+    shippedCity: new FormControl('')
   })
 
   selectedTracks: Track[] = []
@@ -158,13 +159,17 @@ export class TracksComponent implements OnInit {
           }
           let newItem = {
             trackNumber: '',
-            fileName: ''
+            fileName: '',
+            shippedCity: ''
           }
           // @ts-ignore
           newItem[this.addManyForm.value.status.key] = this.addManyForm.value.date
           // @ts-ignore
           newItem.fileName = this.file?.name
           newItem.trackNumber = itemValue
+          if (this.addManyForm.value.status.key === 'shippedFromAlmatyDate' && this.addManyForm.value.shippedCity) {
+            newItem.shippedCity = this.addManyForm.value.shippedCity
+          }
           return newItem
         })
         let promises = []

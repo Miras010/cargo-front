@@ -49,6 +49,7 @@
               <th pSortableColumn="fromChinaToAlmaty">Отправлено с Китая в Алматы</th>
               <th pSortableColumn="receivedInAlmatyDate">ДП на складе в Алматы</th>
               <th pSortableColumn="receivedInAlmatyDate">ДП отправления из Алматы в другой город</th>
+              <th pSortableColumn="receivedInAlmatyDate">Город назначения</th>
               <th pSortableColumn="receivedByClient">Получено клиентом</th>
               <th></th>
             </tr>
@@ -64,6 +65,7 @@
               <td>{{getFormattedDate(track.fromChinaToAlmaty)}}</td>
               <td>{{getFormattedDate(track.receivedInAlmatyDate)}}</td>
               <td>{{getFormattedDate(track.shippedFromAlmatyDate)}}</td>
+              <td>{{getFormattedDate(track.shippedCity)}}</td>
               <td>{{getFormattedDate(track.receivedByClient)}}</td>
               <td>
                 <div class="d-flex">

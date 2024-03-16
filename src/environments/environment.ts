@@ -30,9 +30,9 @@ export const environment = {
   // logoUrl: 'ZIYA.jpeg',
 
   // GGG
-  // apiUrl: 'https://g-cargo.kz:5000/api',
-  // cargoType: 'GGG',
-  // logoUrl: 'ggg.jpeg',
+  apiUrl: 'https://g-cargo.kz:5000/api',
+  cargoType: 'GGG',
+  logoUrl: 'ggg.jpeg',
 
   // AKS
   // apiUrl: 'https://aks-cargo.kz:5000/api',
@@ -55,9 +55,9 @@ export const environment = {
   // logoUrl: 'dilya.jpeg',
 
   // AKTY
-  apiUrl: 'https://akty-cargo.kz:5000/api',
-  cargoType: 'akty',
-  logoUrl: 'akty.jpeg',
+  // apiUrl: 'https://akty-cargo.kz:5000/api',
+  // cargoType: 'akty',
+  // logoUrl: 'akty.jpeg',
 
   // TAU
   // apiUrl: 'https://tau-cargo.kz:5000/api',

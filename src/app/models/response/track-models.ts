@@ -15,6 +15,7 @@ export interface Track {
   fromChinaToAlmaty: Date,
   receivedInAlmatyDate: Date,
   shippedFromAlmatyDate: Date,
+  shippedCity: string,
   receivedInChinaDate: Date,
   receivedByClient: Date
 }

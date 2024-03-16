@@ -76,6 +76,10 @@
               <label class="mb-2">Тип</label>
               <p-dropdown placeholder="Выберите статус"  formControlName="status" [options]="statuses" optionLabel="value"></p-dropdown>
             </div>
+            <div *ngIf="addManyForm.getRawValue().status.key === 'shippedFromAlmatyDate'" class="field mt-3">
+              <label class="mb-2">Город назначения</label>
+              <input type="text" pInputText formControlName="shippedCity" />
+            </div>
             <div class="field mt-3">
               <label class="mb-2">Дата</label>
               <p-calendar formControlName="date" dateFormat="dd.mm.yy" hourFormat="24" [showButtonBar]="true"></p-calendar>
