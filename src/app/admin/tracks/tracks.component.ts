@@ -60,7 +60,7 @@ export class TracksComponent implements OnInit {
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
     { value: 'Дата отправления в Алматы', key: 'fromChinaToAlmaty' },
     { value: 'Дата получения на складе в Алматы', key: 'receivedInAlmatyDate' },
-    { value: 'Дата отправления из Алматы в другой город', key: 'shippedFromAlmatyDate' },
+    { value: 'Дата прибытия в город назначения', key: 'shippedFromAlmatyDate' },
     { value: 'Дата получения клиентом', key: 'receivedByClient' },
   ]
 
