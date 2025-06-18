@@ -60,7 +60,7 @@ export class TracksComponent implements OnInit {
     { value: 'Дата получения на складе в Китае', key: 'receivedInChinaDate' },
     { value: 'Дата отправления в Алматы', key: 'fromChinaToAlmaty' },
     { value: 'Дата получения на складе в Алматы', key: 'receivedInAlmatyDate' },
-    { value: 'Дата прибытия в город назначения', key: 'shippedFromAlmatyDate' },
+    { value: 'Дата отправления из Алматы в другой город', key: 'shippedFromAlmatyDate' },
     { value: 'Дата получения клиентом', key: 'receivedByClient' },
   ]
 
@@ -166,7 +166,7 @@ export class TracksComponent implements OnInit {
           newItem[this.addManyForm.value.status.key] = this.addManyForm.value.date
           // @ts-ignore
           newItem.fileName = this.file?.name
-          newItem.trackNumber = itemValue
+          newItem.trackNumber = itemValue.replace(/\s+/g, "")
           if (this.addManyForm.value.status.key === 'shippedFromAlmatyDate' && this.addManyForm.value.shippedCity) {
             newItem.shippedCity = this.addManyForm.value.shippedCity
           }

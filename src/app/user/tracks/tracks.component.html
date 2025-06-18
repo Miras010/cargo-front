@@ -64,7 +64,7 @@
                 <i *ngIf="!item.track.shippedFromAlmatyDate" class="pi pi-circle" style="font-size: 25px"></i>
               </div>
               <div class="cardSubTitle">
-                <span>Прибыло в {{ item.track.shippedCity ? item.track.shippedCity : 'город назначения' }}:</span><br>
+                <span>Отправлено из Алматы в {{ item.track.shippedCity ? item.track.shippedCity : 'город назначения' }}:</span><br>
                 <span>{{ item.track.shippedFromAlmatyDate ? getFormattedDate(item.track.shippedFromAlmatyDate) : ''  }}</span>
               </div>
             </div>
